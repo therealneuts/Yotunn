@@ -5,8 +5,10 @@ namespace Cards
 {
     abstract class Carte : MonoBehaviour
     {
-        [SerializeField] protected string m_Name;
-        [SerializeField] protected string m_RulesText;
+        [SerializeField] protected CardAsset cardParameters;
+
+        protected string m_Name;
+        protected string m_RulesText;
         protected Player _owner;
         protected Player _controller;
 
@@ -33,7 +35,10 @@ namespace Cards
         {
             _owner = owner;
             _controller = owner;
+            InitializeCard();
         }
+
+        internal abstract void InitializeCard();
     }
     abstract class Entity : Carte, IPermanent
     {
