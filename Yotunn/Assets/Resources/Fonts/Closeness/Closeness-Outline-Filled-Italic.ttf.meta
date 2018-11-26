@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: baec56a7ba1326a4bbac7db22b6e8236
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Closeness Outline Filled
+  fontNames:
+  - Closeness Outline Filled
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 04edfcb2f206b9f40bc105e1f4db32ed, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
