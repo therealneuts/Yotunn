@@ -5,7 +5,7 @@ namespace Cards
 {
     abstract class Carte : MonoBehaviour
     {
-        [SerializeField] protected CardAsset cardParameters;
+        [SerializeField] protected CarteRessource cardParameters;
 
         protected string m_Name;
         protected string m_RulesText;

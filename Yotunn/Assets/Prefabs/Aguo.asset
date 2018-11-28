@@ -11,18 +11,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9703bf8d70890864a887f86ce820bc09, type: 3}
   m_Name: Aguo
   m_EditorClassIdentifier: 
-  characterAsset: {fileID: 0}
-  Description: Deal 8 damages to the selected ennemy
-  CardImage: {fileID: 21300000, guid: 045e89c67f02ffa4eb57e83e4df9cca0, type: 3}
-  ManaCost: 3
+  RessourceJoueurCharacter: {fileID: 0}
+  Description: Gelle ton ennemy pour lui faire 4 de dommages!
+  ImageRessource: {fileID: 21300000, guid: a32a93d88e7c6dd4ab8c4ec0a37c8e9e, type: 3}
+  CoutMana: 0
   MaxHealth: 0
-  Attack: 0
+  Attack: 4
   AttacksForOneTurn: 1
   Taunt: 0
   Charge: 0
   CreatureScriptName: 
   specialCreatureAmount: 0
   SpellScriptName: 
-  specialSpellAmount: 4
+  specialSpellAmount: 2
   Targets: 1
-  CardType: {fileID: 21300000, guid: 8f9f2c5d564351347ba1137b8db284fe, type: 3}
+  CarteType: {fileID: 21300000, guid: 1f5ea65cc5eed004485b85d0c1204e9e, type: 3}
