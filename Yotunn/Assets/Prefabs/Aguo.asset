@@ -25,3 +25,4 @@ MonoBehaviour:
   SpellScriptName: 
   specialSpellAmount: 4
   Targets: 1
+  CardType: {fileID: 21300000, guid: 8f9f2c5d564351347ba1137b8db284fe, type: 3}

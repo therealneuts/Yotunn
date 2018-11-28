@@ -13,14 +13,17 @@ public enum TargetingOptions
     YourCharacters
 }
 
-public class CardAsset : ScriptableObject 
+public class CardAsset : ScriptableObject
 {
-    // l'objet contiendra toutes les information de la majorité des cartes
+    //Cet  objet dérive de ScriptableObject, lequel dérive de la classe object, cela me permet de ne pas toujours 
+    //recréer le code pour un objet voulu
+
+    // l'objet contiendra toutes les informations de la majorité des cartes
     [Header("General info")]
     public CharacterAsset characterAsset;  // if this is null, it`s a neutral card, ne fait aucun dommage
-    [TextArea(2,3)]
+    [TextArea(2, 3)]
     public string Description;  // Description for spell or character
-	public Sprite CardImage;
+    public Sprite CardImage; //Prend l'image de la carte voulu
     public int ManaCost;
 
     [Header("Creature Info")]
@@ -36,5 +39,8 @@ public class CardAsset : ScriptableObject
     public string SpellScriptName;
     public int specialSpellAmount;
     public TargetingOptions Targets;
+
+    [Header("TypeImage")]
+    public Sprite CardType;
 
 }

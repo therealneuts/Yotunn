@@ -511,8 +511,11 @@ MonoBehaviour:
   CardGraphicImage: {fileID: 114455953574705238}
   CardBodyImage: {fileID: 114612651839015868}
   CardFaceFrameImage: {fileID: 114368772978046946}
+  CardTypeImage: {fileID: 114132674074181008}
   CardFaceGlowImage: {fileID: 0}
   CardBackGlowImage: {fileID: 0}
+  HealthObject: {fileID: 1575245803576122}
+  AttackObject: {fileID: 1153064959453162}
 --- !u!114 &114063197469475634
 MonoBehaviour:
   m_ObjectHideFlags: 1

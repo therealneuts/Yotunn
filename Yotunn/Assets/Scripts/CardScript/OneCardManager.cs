@@ -4,10 +4,11 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 
 // Détient toutes les références du textes et des Images sur la carte
+// Elle informe au GameObject quelle information qu'elle doit prendre
 public class OneCardManager : MonoBehaviour {
 
     //Ici nous avons besoin d'une référence vers la CarteRessource du jeu pour contrôler les différentes propriétés
-    //de l'objet dans le plan du jeu, soit le text les image, et les différentes propriéyés.
+    //de l'objet dans le plan du jeu, soit le text les image, et les différentes propriétés.
     public CardAsset cardAsset;
     //Étant donné que'une carte transporte un preview, une copie conforme à la carte mais qui contient
     //seulement les propriétés graphiques de la carte donnée, le OneCardManager doit pouvoir connaître celui
@@ -27,10 +28,16 @@ public class OneCardManager : MonoBehaviour {
     public Image CardGraphicImage;
     public Image CardBodyImage;
     public Image CardFaceFrameImage;
+    //Élément qui dit au joueur quelle type est la carte
+    public Image CardTypeImage;
     //Éléments graphique qui sera vu lorsque nous activons, afin que nous puissons informer au joueur qu'il peut
     //faire une action avec celle-ci
     public Image CardFaceGlowImage;
     public Image CardBackGlowImage;
+    [Header("Graphics that needs to be disabled")]
+    //Les éléments qui devront être caché car ils ne seront pas utiles
+    public GameObject HealthObject;
+    public GameObject AttackObject;
 
     //La méthode Awake qui à été donné à travers l'héritage de la classe MonoBehavior qui se fait après l'instanciation
     //de tous les objets devant être instancié au début du jeu
@@ -66,6 +73,7 @@ public class OneCardManager : MonoBehaviour {
         }
     }
 
+    //Méthode qui met toutes les informations nécessaire à la carte
     public void ReadCardFromAsset()
     {
         //Sera fait pour toutes les cartes
@@ -87,6 +95,9 @@ public class OneCardManager : MonoBehaviour {
             CardFaceFrameImage.color = Color.white;
             //CardTopRibbonImage.color = GlobalSettings.Instance.CardRibbonsStandardColor;
             //CardLowRibbonImage.color = GlobalSettings.Instance.CardRibbonsStandardColor;
+
+            //Si n'est pas un character asset mettre le type de la carte
+            CardTypeImage.sprite = cardAsset.CardType;
         }
         //Appliquer le nom de la carte selon la définition de la carte donnée
         NameText.text = cardAsset.name;
@@ -103,8 +114,16 @@ public class OneCardManager : MonoBehaviour {
         if (cardAsset.MaxHealth != 0)
         {
             //Si elle est une créature le nombre d'attaque et de vie doit être affiché au joueur
+            HealthObject.active = true;
+            AttackObject.active = true;
             AttackText.text = cardAsset.Attack.ToString();
             HealthText.text = cardAsset.MaxHealth.ToString();
+        }
+        else
+        {
+            //Si elle n'est pas une créature ne pas afficher le graphique du health et de l'attaque
+            HealthObject.active = false;
+            AttackObject.active = false;
         }
 
 
