@@ -15,9 +15,9 @@ public enum TargetingOptions
 
 public class CardAsset : ScriptableObject 
 {
-    // this object will hold the info about the most general card
+    // l'objet contiendra toutes les information de la majorité des cartes
     [Header("General info")]
-    public CharacterAsset characterAsset;  // if this is null, it`s a neutral card
+    public CharacterAsset characterAsset;  // if this is null, it`s a neutral card, ne fait aucun dommage
     [TextArea(2,3)]
     public string Description;  // Description for spell or character
 	public Sprite CardImage;

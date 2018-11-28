@@ -5,10 +5,12 @@ public enum CharClass{ Elf, Monk, Warrior}
 
 public class CharacterAsset : ScriptableObject 
 {
+    //Contient toutes les informations nécessaires pour la construction d'un objet de style character
 	public CharClass Class;
 	public string ClassName;
 	public int MaxHealth = 30;
 	public string HeroPowerName;
+    //Contient les éléments graphiques
 	public Sprite AvatarImage;
     public Sprite HeroPowerIconImage;
     public Sprite AvatarBGImage;
