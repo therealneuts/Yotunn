@@ -32,7 +32,7 @@ public class CarteRessourceEnGameObject : MonoBehaviour {
     public Image ImageCarteType;
     //Éléments graphique qui sera vu lorsque nous activons, afin que nous puissons informer au joueur qu'il peut
     //faire une action avec celle-ci
-    public Image ImageGlowDevant;
+    public SpriteRenderer ImageGlowDevant;
     public Image ImageGlowDerriere;
     [Header("Graphics that needs to be disabled")]
     //Les éléments qui devront être caché car ils ne seront pas utiles

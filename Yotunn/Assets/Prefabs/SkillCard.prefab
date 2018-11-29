@@ -570,7 +570,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6415094, g: 0.6415094, b: 0.6415094, a: 0.7176471}
+  m_Color: {r: 0.6415094, g: 0.6415094, b: 0.6415094, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -819,7 +819,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 018032d2fe951a84381f2a504f94a9b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flCarteScaleMult: 0.007
+  flCarteScaleMult: 0.012
   v3CarteInitialScale: {x: 0.005, y: 0.005, z: 1}
   Carte: {fileID: 1416686440830104}
   CarteRectTransform: {fileID: 224300790825681708}
