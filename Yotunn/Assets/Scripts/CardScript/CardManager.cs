@@ -2,25 +2,21 @@
 using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using System;
+using Cards;
 
 // Détient toutes les références du textes et des Images sur la carte
 // Elle informe au GameObject quelle information qu'elle doit prendre
-public class CarteRessourceEnGameObject : MonoBehaviour {
+public class CardManager : MonoBehaviour {
 
     //Ici nous avons besoin d'une référence vers la CarteRessource du jeu pour contrôler les différentes propriétés
     //de l'objet dans le plan du jeu, soit le text les image, et les différentes propriétés.
     public CarteRessource CarteRessource;
     //Étant donné que'une carte transporte un preview, une copie conforme à la carte mais qui contient
-    //seulement les propriétés graphiques de la carte donnée, le CarteRessourceEnGameObject doit pouvoir connaître celui
-    //du preview, lequel transporte lui-même un CarteRessourceEnGameObject.
-    public CarteRessourceEnGameObject CartePreview;
-    [Header("Text Component References")]
-    //Toutes les descriptions d'une carte
-    public Text txtNom;
-    public Text txtManaCout;
-    public Text txtDescription;
-    public Text txtVie;
-    public Text txtAttaque;
+    //seulement les propriétés graphiques de la carte donnée, le CardManager doit pouvoir connaître celui
+    //du preview, lequel transporte lui-même un CardManager.
+    public CardManager CartePreview;
+    
     [Header("Image References")]
     //Tous les éléments graphiques d'une carte
     public Image ImageRubanHaut;
@@ -28,16 +24,128 @@ public class CarteRessourceEnGameObject : MonoBehaviour {
     public Image ImageCarteGraphique;
     public Image ImageCorps;
     public Image ImageDevantFrame;
-    //Élément qui dit au joueur quelle type est la carte
-    public Image ImageCarteType;
+
     //Éléments graphique qui sera vu lorsque nous activons, afin que nous puissons informer au joueur qu'il peut
     //faire une action avec celle-ci
     public SpriteRenderer ImageGlowDevant;
     public Image ImageGlowDerriere;
-    [Header("Graphics that needs to be disabled")]
-    //Les éléments qui devront être caché car ils ne seront pas utiles
-    public GameObject GOvie;
-    public GameObject GOattack;
+
+    Carte _cardScript;
+
+    public Carte CardScript
+    {
+        get
+        {
+            return _cardScript;
+        }
+
+        set
+        {
+            _cardScript = value;
+        }
+    }
+    //Références au propriétaire de la carte et à son avatar.
+    Player _owner;
+    internal Player Owner
+    {
+        get
+        {
+            return _owner;
+        }
+
+        set
+        {
+            _owner = value;
+        }
+    }
+
+    public CardManager Avatar
+    {
+        get
+        {
+            return Owner.Avatar;
+        }
+    }
+
+
+    /*
+     Champs, propriétés et événements concernant les valeurs numériques des cartes. Les événements nous donnent un grand degré
+     de flexibilité de design en plus d'améliorer la modularisation et la lisibilité du code. Les objets qui affichent ces
+     valeurs peuvent maintenant faire leur propre travail.
+
+        -Alex C.
+    */
+    public delegate void OnParameterChanged(CardManager card, int difference);
+
+    public int _health;
+    public int _power;
+    public int _manaCost;
+
+    public event OnParameterChanged HealthChanged;
+    public event OnParameterChanged PowerChanged;
+    public event OnParameterChanged ManaCostChanged;
+
+    public int Health
+    {
+        get
+        {
+            return _health;
+        }
+
+        set
+        {
+            int initial = _health;
+            _health = value;
+            int difference = _health - initial;
+            if (HealthChanged != null)
+            {
+                HealthChanged(this, difference);
+            }
+            
+            if (_health <= 0)
+            {
+                Discard();
+            }
+        }
+    }
+
+    public int Power
+    {
+        get
+        {
+            return _power;
+        }
+
+        set
+        {
+            int initial = _power;
+            _power = value;
+            int difference = _power - initial;
+            if (PowerChanged != null)
+            {
+                PowerChanged(this, difference);
+            }
+        }
+    }
+
+    public int ManaCost
+    {
+        get
+        {
+            return _manaCost;
+        }
+
+        set
+        {
+            int initial = _manaCost;
+            _manaCost = value;
+            int difference = _manaCost - initial;
+            if (ManaCostChanged != null)
+            {
+                ManaCostChanged(this, difference);
+            }
+        }
+    }
 
     //La méthode Awake qui à été donné à travers l'héritage de la classe MonoBehavior qui se fait après l'instanciation
     //de tous les objets devant être instancié au début du jeu
@@ -46,30 +154,57 @@ public class CarteRessourceEnGameObject : MonoBehaviour {
         //Si une carte asset a été référenciée, et donc non null, l'instance de CarteRessourceEnGameObject sait
         //qu'il doit mettre toutes les informations dans le graphique de la carte sur le jeu
         if (CarteRessource != null)
+        {
             //La méthode qui insère toute l'information de la carte ressource dans la carte instancié du jeu
             CarteRessourceToGameGraphique();
+            InitializeValues();
+        }
     }
 
     /// <summary>
     /// Un propriété qui nous laissera jouer la carte et si elle peut être jouer une couleur de fond sera affiché pour
     /// que le joueur soit notifié
     /// </summary>
-    private bool boPeutEtreJoué = false;
+    private bool canBePlayed = false;
     public bool CanBePlayedNow
     {
         get
         {
-            //si elle retourne vrai la carte pourra être jouer par le joueur
-            return boPeutEtreJoué;
+            
+            return canBePlayed;
         }
 
         set
         {            
-            boPeutEtreJoué = value;
+            canBePlayed = value;
             //La raison pour laquelle nous Hard Codons la propriété de CanBePlayedNow est parce qu'à chaque changement 
             //de celui-ci nous voulons copoier la valeur donnée à l'objet ImageGlowDevant, ce qui activera
             //notre belle image de fond pour notre carte
             ImageGlowDevant.enabled = value;
+        }
+    }
+
+
+
+    public void InitializeValues()
+    {
+        ManaCost = CarteRessource.CoutMana;
+        Type cardType = System.Type.GetType(CarteRessource.cardScript);
+
+        if (!cardType.IsSubclassOf(typeof(Carte)))
+        {
+            throw new System.Exception("CarteRessource.cardScript is not a subclass of Carte");
+        }
+
+        CardScript =  (Carte)gameObject.AddComponent(cardType);
+        if (CardScript is Entity)
+        {
+            Health = CarteRessource.MaxHealth;
+            Power = CarteRessource.Power;
+        }
+        else if (CardScript is Skill)
+        {
+            Power = CarteRessource.Power;
         }
     }
 
@@ -97,33 +232,6 @@ public class CarteRessourceEnGameObject : MonoBehaviour {
             //CardLowRibbonImage.color = GlobalSettings.Instance.CardRibbonsStandardColor;
 
             //Si n'est pas un character asset mettre le type de la carte
-            ImageCarteType.sprite = CarteRessource.CarteType;
-        }
-        //Appliquer le nom de la carte selon la définition de la carte donnée
-        txtNom.text = CarteRessource.name;
-        //          le mana de la carte selon la définition de la carte donnée
-        txtManaCout.text = CarteRessource.CoutMana.ToString();
-        //          la description de la carte selon la définition de la carte donnée
-        txtDescription.text = CarteRessource.Description;
-        //          L'image de la carte selon la définirion de la carte donnée
-        ImageCarteGraphique.sprite = CarteRessource.ImageRessource;
-
-        //Si la carte a un maximum de vie de zéro nous savons que c'est un sortilège
-        //celle-ci est charactèrisé par le fait qu'elle n'a pas de vie et 
-        //qui ne reste pas sur le jeu apès son utilisation
-        if (CarteRessource.MaxHealth != 0)
-        {
-            //Si elle est une créature le nombre d'attaque et de vie doit être affiché au joueur
-            GOvie.active = true;
-            GOattack.active = true;
-            txtAttaque.text = CarteRessource.Attack.ToString();
-            txtVie.text = CarteRessource.MaxHealth.ToString();
-        }
-        else
-        {
-            //Si elle n'est pas une créature ne pas afficher le graphique du health et de l'attaque
-            GOvie.active = false;
-            GOattack.active = false;
         }
 
 
@@ -137,6 +245,12 @@ public class CarteRessourceEnGameObject : MonoBehaviour {
             //Appeler la  méthode readCardFromAsset() du preview
             CartePreview.CarteRessourceToGameGraphique();
         }
+    }
+
+    private void Discard()
+    {
+        //TODO implement discarding.
+        throw new NotImplementedException();
     }
 }
 

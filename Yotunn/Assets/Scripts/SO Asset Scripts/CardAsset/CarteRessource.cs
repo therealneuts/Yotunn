@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Cards;
 
 public enum TargetingOptions
 {
@@ -11,6 +12,15 @@ public enum TargetingOptions
     AllCharacters, 
     EnemyCharacters,
     YourCharacters
+}
+
+public enum CardTypes
+{
+    Avatar,
+    Creature,
+    Skill,
+    Boost,
+    Status
 }
 
 public class CarteRessource : ScriptableObject
@@ -25,22 +35,15 @@ public class CarteRessource : ScriptableObject
     public string Description;  // Description for spell or character
     public Sprite ImageRessource; //Prend l'image de la carte voulu
     public int CoutMana;
+    public CardTypes type;
+    public string cardScript;
 
     [Header("Creature Info")]
     public int MaxHealth;
-    public int Attack;
+    public int Power;
     public int AttacksForOneTurn = 1;
-    public bool Taunt;
-    public bool Charge;
-    public string CreatureScriptName;
-    public int specialCreatureAmount;
 
-    [Header("SpellInfo")]
-    public string SpellScriptName;
-    public int specialSpellAmount;
+    [Header("Spell Info")]
     public TargetingOptions Targets;
-
-    [Header("TypeImage")]
-    public Sprite CarteType;
 
 }
