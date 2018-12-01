@@ -63,7 +63,20 @@ namespace Cards
         string m_Name { get; set; }
         Hand m_Hand { get; set; }
 
-        internal Avatar avatar;
+        CardManager _avatar;
+
+        public CardManager Avatar
+        {
+            get
+            {
+                return _avatar;
+            }
+
+            set
+            {
+                _avatar = value;
+            }
+        }
 
         private Deck _deck;
 
@@ -73,6 +86,7 @@ namespace Cards
         }
 
         public Player Enemy { get { return Battlefield.Players.GetOtherPlayer(this); } }
+
 
         public delegate void CardPlayedHandler(Player source, IPlayable carte);
 

@@ -6,10 +6,10 @@ namespace Cards
 {
     interface IDamaging
     {
-        int BaseDamage { get; }
+
     }
 
-    interface IGivesArmor
+    interface IDefensive
     {
         int BaseArmor { get; }
         int Armor { get; set; }
@@ -37,13 +37,11 @@ namespace Cards
 
     interface IPlayable
     {
-        int Cost { get; }
         void Play();
     }
 
     interface IPermanent
     {
         //todo position
-        void Destroy();
     }
 }
