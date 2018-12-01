@@ -4,9 +4,12 @@ using UnityEngine;
 using DG.Tweening;
 
 public class CartePreview : MonoBehaviour {
-    //Propriété statique afin de créer un singleton, lequel fera certain qu'un
-    //joueur ne puisse activer cet événement
-    private static GameObject CarteEnPreview = null;
+    //Référence statique lequel fera certain qu'un
+    //joueur ne puisse activer cet événement plsu d'une fois lorsque c'est activé
+    private static bool CarteEnPreview = false;
+    
+    [Header("Indique si la carte à un préview")]
+    public bool hasPreview; //Si vrai la carte pourra donner un preview
 
     //le float qui sera appliqué donnera le scale que doit prendre la partie
     //graphique de la carte en l'enrigistrent en float on peut le transferer
@@ -19,11 +22,17 @@ public class CartePreview : MonoBehaviour {
     public Vector3 v3CarteInitialScale;
 
     [Header("Besoin d'une carte ici")]
-    public GameObject Carte; //Servira pour le singleton
+    public GameObject Carte; //Servira comme référence pour savoir si une est activé
     [Header("Besoin d'une rectTransform ici")]
     //Le rect transforme est le parent de tout les composants graphiques de la carte
     //Alors si je scale celui-ci je mannipule toute les composants graphiques aussi
     public RectTransform CarteRectTransform;
+
+    //Délegué d'évenement qui est appelé lorsque OnMouse est appelé
+    public delegate void DelegateOnMouseOverAction();
+    //Les différents événements, que si la carte a un hasPreview il son appelé 
+    public event DelegateOnMouseOverAction OnMouseOverAction;
+    public event DelegateOnMouseOverAction OnMouseLeaveACtion;
 
     private void Start()
     {
@@ -31,6 +40,15 @@ public class CartePreview : MonoBehaviour {
         //Instancie un nouveau vecteur 3 selon les paramètres données
         //Celui-ci est donnée qu'une seul foix durant l'instance de cet objet
         v3CarteScaleMult = new Vector3(flCarteScaleMult, flCarteScaleMult);
+
+        //si has Preview est vrai
+        if (hasPreview)
+        {
+            //les instances de DelegateOnMouseOverAction vont pointer vers des
+            //méthode anonyme
+            OnMouseOverAction += () => CarteRectTransform.DOScale(v3CarteScaleMult, 1f);
+            OnMouseLeaveACtion += () => CarteRectTransform.DOScale(v3CarteInitialScale, 1f);
+        }
     }
 
     //Cet événement est un événement qui à été passé du parent MonoBehaviour
@@ -41,32 +59,25 @@ public class CartePreview : MonoBehaviour {
         //Applique le nouveau scale dans le CarteRectTransform
         //Selon la valeur du V3 et selon une vitesse de 1f, lequel
         //est permis par using DG.Tweening
-        CarteRectTransform.DOScale(v3CarteScaleMult, 1f);
-
-        //if (CarteEnPreview == null)
-        //{
-        //    CarteEnPreview = Carte;
-        //    CarteRectTransform.transform.localScale = new Vector3(1, 1, 1);
-        //    Debug.Log("v3Initiale:" + CarteRectTransform.transform.localScale);
-        //    CarteRectTransform.transform.DOScale(v3CarteScaleMult, 1f);
-        //}
-        //else
-        //{
-        //    CarteEnPreview.transform.localScale = new Vector3(1, 1, 1);
-        //    CarteEnPreview = null;
-
-
-        //}
+        if(!CarteEnPreview)
+        {
+            CarteEnPreview = true;
+            //Si l'action over n'est pas null elle est appelé
+            if (OnMouseOverAction != null)
+                OnMouseOverAction();
+        }
     }
 
     //Lorsque le curseur sort du collider cette méthode est appelé
     //Il vient aussi de la classe de base
     private void OnMouseExit()
     {
-        //CarteEnPreview = null;
-        //CarteRectTransform.transform.DOScale(new Vector3(1,1,1), 1f);
+        CarteEnPreview = false;
 
         //rend la carte sous son scale initiale
-        CarteRectTransform.DOScale(v3CarteInitialScale, 1f);
+        if (OnMouseLeaveACtion != null)
+            //Si l'action leave n'est pas null elle est appelé
+            OnMouseLeaveACtion();
     }
 }
+//Yan
