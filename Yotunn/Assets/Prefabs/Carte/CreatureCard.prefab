@@ -1156,7 +1156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 018032d2fe951a84381f2a504f94a9b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hasPreview: 1
+  hasPreview: 0
   flCarteScaleMult: 0.012
   v3CarteInitialScale: {x: 0.005, y: 0.005, z: 1}
   Carte: {fileID: 1880508399272694}
