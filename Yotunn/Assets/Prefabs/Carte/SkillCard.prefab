@@ -371,7 +371,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1416686440830104}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.08, y: -0.015579205, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224300790825681708}
@@ -819,6 +819,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 018032d2fe951a84381f2a504f94a9b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasPreview: 0
   flCarteScaleMult: 0.012
   v3CarteInitialScale: {x: 0.005, y: 0.005, z: 1}
   Carte: {fileID: 1416686440830104}
