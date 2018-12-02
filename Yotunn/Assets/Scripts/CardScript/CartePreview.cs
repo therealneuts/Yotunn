@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using System.Linq;
 
 public class CartePreview : MonoBehaviour {
     //Référence statique lequel fera certain qu'un
@@ -34,7 +35,8 @@ public class CartePreview : MonoBehaviour {
     public event DelegateOnMouseOverAction OnMouseOverAction;
     public event DelegateOnMouseOverAction OnMouseLeaveACtion;
 
-    [SerializeField] float yOffset = 2;
+    [SerializeField] float yOffset = 2f;
+    [SerializeField] float duration = 0.5f;
 
     Canvas[] cardCanvas;
 
@@ -51,41 +53,66 @@ public class CartePreview : MonoBehaviour {
         {
             //les instances de DelegateOnMouseOverAction vont pointer vers des
             //méthode anonyme
-            OnMouseOverAction += () => CarteRectTransform.DOScale(v3CarteScaleMult, 1f);
-            OnMouseOverAction += () => CarteRectTransform.DOLocalMoveY(transform.localPosition.y + yOffset, 1f);
-            OnMouseLeaveACtion += () => CarteRectTransform.DOScale(v3CarteInitialScale, 1f);
-            OnMouseLeaveACtion += () => CarteRectTransform.DOLocalMoveY(transform.localPosition.y, 1f);
+            //OnMouseOverAction += () => sequence.Append(CarteRectTransform.DOScale(v3CarteScaleMult, duration));
+            //OnMouseOverAction += () => sequence.Append(CarteRectTransform.DOLocalMoveY(transform.localPosition.y + direction*yOffset, duration));
+            //OnMouseLeaveACtion += () => sequence.Append(CarteRectTransform.DOScale(v3CarteInitialScale, duration));
+            //OnMouseLeaveACtion += () => sequence.Append(CarteRectTransform.DOLocalMoveY(transform.localPosition.y, duration));
         }
     }
 
     //Cet événement est un événement qui à été passé du parent MonoBehaviour
     //Cette méthode est appelé à tout les fois que l'usagé place son curseur 
     //par dessus un objet appellé collider du GameObject de la carte
-    private void OnMouseOver()
+    private void OnMouseEnter()
     {
-        //Applique le nouveau scale dans le CarteRectTransform
-        //Selon la valeur du V3 et selon une vitesse de 1f, lequel
-        //est permis par using DG.Tweening
-        if(!CarteEnPreview)
-        {
-            CarteEnPreview = true;
-            System.Array.ForEach(cardCanvas, c => c.sortingOrder = 4);
-            //Si l'action over n'est pas null elle est appelé
-            if (OnMouseOverAction != null)
-                OnMouseOverAction();
-        }
+        //Donner un SortingOrder gigantesque à la carte assure qu'elle sera visible, même si d'autres objets sont plus près de la caméra.
+        System.Array.ForEach(cardCanvas, c => c.sortingOrder = 255);
+        StartCoroutine(BeginPreview());
     }
 
     //Lorsque le curseur sort du collider cette méthode est appelé
     //Il vient aussi de la classe de base
     private void OnMouseExit()
     {
-        CarteEnPreview = false;
         System.Array.ForEach(cardCanvas, c => c.sortingOrder = 0);
-        //rend la carte sous son scale initiale
-        if (OnMouseLeaveACtion != null)
-            //Si l'action leave n'est pas null elle est appelé
-            OnMouseLeaveACtion();
+
+        StartCoroutine(EndPreview());
+    }
+
+    IEnumerator BeginPreview()
+    {
+        //y = 0 est la ligne du milieu du jeu. Si la carte est dans la partie supérieure du jeu (joueur 2), elle grossit vers le bas.
+        //Si elle est dans la partie inférieure du jeu, elle grossit vers le haut.
+        int direction = transform.position.y > 0 ? -1 : 1;
+
+        //Crée une liste des objets Tween qui sont présentement en train de manipuler cet objet. Tant que l'objet est en train d'être manipulé, la coroutine se suspend.
+        List<Tween> activeTweens = DOTween.TweensByTarget(transform, false);
+        while (activeTweens != null)
+        {
+            //Trouve le tween en train de manipuler l'objet qui a la plus longue durée, puis suspend jusqu'à ce que celui-ci soit fini.
+            Tween longest = activeTweens.Where(t => t.Duration() == activeTweens.Max(tw => tw.Duration()))
+                                        .First();
+            yield return longest.WaitForCompletion();
+            activeTweens = DOTween.TweensByTarget(transform, false);
+        }
+
+        //Applique les manipulations à la carte.
+        CarteRectTransform.DOScale(v3CarteScaleMult, duration);
+        CarteRectTransform.DOLocalMoveY(transform.localPosition.y + direction * yOffset, duration);
+    }
+
+    IEnumerator EndPreview()
+    {
+        CarteRectTransform.DOScale(v3CarteInitialScale, duration);
+        List<Tween> activeTweens = DOTween.TweensByTarget(transform, false);
+        while (activeTweens != null)
+        {
+            Tween longest = activeTweens.Where(t => t.Duration() == activeTweens.Max(tw => tw.Duration()))
+                                        .First();
+            yield return longest.WaitForCompletion();
+            activeTweens = DOTween.TweensByTarget(transform, false);
+        }
+        CarteRectTransform.DOLocalMoveY(transform.localPosition.y, duration);
     }
 }
-//Yan
+//Yan, Alex C

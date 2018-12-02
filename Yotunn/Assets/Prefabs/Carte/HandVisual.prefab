@@ -381,7 +381,8 @@ MonoBehaviour:
   - {fileID: 4999694990183258}
   - {fileID: 4455881681614176}
   - {fileID: 4286165500511798}
-  maxAngle: 0.8
+  totalArc: 1.5707964
+  maxAngle: 0.2
   radius: 10
   zSpacing: 0.02
   trimmedSlots: []

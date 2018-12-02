@@ -536,6 +536,7 @@ MonoBehaviour:
   Carte: {fileID: 1410293490512752}
   CarteRectTransform: {fileID: 224428777407725036}
   yOffset: 2
+  duration: 0.1
 --- !u!114 &114067200956776074
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1259,6 +1260,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fcb6705c0a478841a7c3c2ac928554b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  duration: 0.2
 --- !u!114 &114737271173858842
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1592,7 +1594,6 @@ MonoBehaviour:
   CarteFace: {fileID: 224084769642285914}
   CarteBack: {fileID: 224253320551425506}
   FacePoint: {fileID: 4392769893762208}
-  cameraTransform: {fileID: 0}
 --- !u!114 &114994221888576334
 MonoBehaviour:
   m_ObjectHideFlags: 1

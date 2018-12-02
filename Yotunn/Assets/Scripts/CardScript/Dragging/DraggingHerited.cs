@@ -7,6 +7,8 @@ using DG.Tweening;
 //Class hérité de la classe abstraite DraggingAction
 public class DraggingHerited : DraggingAction {
 
+    [SerializeField] float duration = 0.2f;
+
     //Vector3 qui sauvegardera la position initiale du début du dragging
     private Vector3 v3PositionInitiale;
     
@@ -23,7 +25,7 @@ public class DraggingHerited : DraggingAction {
         //DOMove change la position en fesant une transition à l'objet dans le jeu vers la position donnée au premier paramètre
         //à une vitesse donnée comme deuxième paramètre
         //.SetEase est une méthode qui est appelé pour dire comment la transition se fera
-        transform.DOMove(v3PositionInitiale, 1f);/*.SetEase(Ease.OutBounce, .5f, .1f); // <-- http://www.easings.net*/
+        transform.DOMove(v3PositionInitiale, duration);/*.SetEase(Ease.OutBounce, .5f, .1f); // <-- http://www.easings.net*/
     }
 
     public override void OnDraggingInUpdate()
