@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Cards;
+using TMPro;
 
 public class CardHealth : MonoBehaviour {
 
     CardManager cardManager = null;
     int health;
-    Text healthText = null;
+    TextMeshProUGUI healthText = null;
 
 	// Use this for initialization
 	void Start () {
         //Assignation des références.
         cardManager = GetComponentInParent<CardManager>();
-        healthText = GetComponent<Text>();
+        healthText = GetComponent<TextMeshProUGUI>();
 
         Carte type = cardManager.CardScript;
         if (type is Cards.Entity)

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RessourceJoueurCharacter: {fileID: 0}
   Description: Yotunn templars are fierce and unflinching warriors, fighting to the
-    death who whoever earns their loyalty.
+    death for whoever earns their loyalty.
   ImageRessource: {fileID: 21300000, guid: 90ef6b7835131a34292d2d8f5e986031, type: 3}
   CoutMana: 2
   type: 1

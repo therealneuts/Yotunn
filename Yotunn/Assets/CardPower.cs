@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Cards;
+using TMPro;
 
 public class CardPower : MonoBehaviour {
 
     CardManager cardManager = null;
     int initialPower, power;
-    Text powerText = null;
+    TextMeshProUGUI powerText = null;
     CardManager avatar;
     Carte type;
 
@@ -18,7 +19,7 @@ public class CardPower : MonoBehaviour {
 
         //Assignation des références.
         cardManager = GetComponentInParent<CardManager>();
-        powerText = GetComponent<Text>();
+        powerText = GetComponent<TextMeshProUGUI>();
         //avatar = cardManager.Avatar;
         type = cardManager.CardScript;
 
@@ -29,7 +30,7 @@ public class CardPower : MonoBehaviour {
             return;
         }
 
-        //La puissance des habiletés dépend de celle de l'avatar.
+        //La puissance des habiletés dépend de celle de l'avatar, alors il faut discriminer.
         if (type is Skill)
         {
             initialPower = cardManager.Power;

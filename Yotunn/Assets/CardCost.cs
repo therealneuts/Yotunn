@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Cards;
+using TMPro;
 
 public class CardCost : MonoBehaviour {
 
     CardManager cardManager = null;
     int cost, initialCost;
-    Text costText = null;
+    TextMeshProUGUI costText = null;
     Cards.Carte type;
 
     // Use this for initialization
@@ -16,7 +17,7 @@ public class CardCost : MonoBehaviour {
     {
         //Assignation des références.
         cardManager = GetComponentInParent<CardManager>();
-        costText = GetComponent<Text>();
+        costText = GetComponent<TextMeshProUGUI>();
         type = cardManager.CardScript;
 
         //Les cartes qui ne sont pas jouables n'ont pas besoin de cette composante.
