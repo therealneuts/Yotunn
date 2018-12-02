@@ -72,7 +72,7 @@ public class DraggingBehavior : MonoBehaviour {
 
             // transform est une propriété pour toute game object (voir haut)
             // nous updastons la position de l'objet selon un nouveau vecteur crée selon la position du curseur 
-            this.transform.position = new Vector3(v3PositionSourie.x, v3PositionSourie.y, transform.position.z);
+            this.transform.position = new Vector3(v3PositionSourie.x, v3PositionSourie.y, -1f);
         }
     }
 
@@ -87,4 +87,4 @@ public class DraggingBehavior : MonoBehaviour {
             anDraggable.OnEndDrag();
         }
     }
-}
+}//Yan
