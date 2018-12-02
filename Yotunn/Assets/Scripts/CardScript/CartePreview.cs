@@ -17,9 +17,9 @@ public class CartePreview : MonoBehaviour {
     [Header("Appliquer un scale")]
     public float flCarteScaleMult;
     //le vecteur3 sera configuré par flCarteScaleMult
-    private Vector3 v3CarteScaleMult;
+    Vector3 v3CarteScaleMult;
     //ici on applique le scale initiale dans l'éditeur
-    public Vector3 v3CarteInitialScale;
+    Vector3 v3CarteInitialScale;
 
     [Header("Besoin d'une carte ici")]
     public GameObject Carte; //Servira comme référence pour savoir si une est activé
@@ -34,12 +34,17 @@ public class CartePreview : MonoBehaviour {
     public event DelegateOnMouseOverAction OnMouseOverAction;
     public event DelegateOnMouseOverAction OnMouseLeaveACtion;
 
+    [SerializeField] float yOffset = 2;
+
+    Canvas[] cardCanvas;
+
     private void Start()
     {
-        //Debug.Log(CarteRectTransform.localScale); 
+        cardCanvas = GetComponentsInChildren<Canvas>();
+        v3CarteInitialScale = CarteRectTransform.localScale;
         //Instancie un nouveau vecteur 3 selon les paramètres données
         //Celui-ci est donnée qu'une seul foix durant l'instance de cet objet
-        v3CarteScaleMult = new Vector3(flCarteScaleMult, flCarteScaleMult);
+        v3CarteScaleMult = new Vector3(v3CarteInitialScale.x * flCarteScaleMult, v3CarteInitialScale.y * flCarteScaleMult, 1f);
 
         //si has Preview est vrai
         if (hasPreview)
@@ -47,7 +52,9 @@ public class CartePreview : MonoBehaviour {
             //les instances de DelegateOnMouseOverAction vont pointer vers des
             //méthode anonyme
             OnMouseOverAction += () => CarteRectTransform.DOScale(v3CarteScaleMult, 1f);
+            OnMouseOverAction += () => CarteRectTransform.DOLocalMoveY(transform.localPosition.y + yOffset, 1f);
             OnMouseLeaveACtion += () => CarteRectTransform.DOScale(v3CarteInitialScale, 1f);
+            OnMouseLeaveACtion += () => CarteRectTransform.DOLocalMoveY(transform.localPosition.y, 1f);
         }
     }
 
@@ -62,6 +69,7 @@ public class CartePreview : MonoBehaviour {
         if(!CarteEnPreview)
         {
             CarteEnPreview = true;
+            System.Array.ForEach(cardCanvas, c => c.sortingOrder = 4);
             //Si l'action over n'est pas null elle est appelé
             if (OnMouseOverAction != null)
                 OnMouseOverAction();
@@ -73,7 +81,7 @@ public class CartePreview : MonoBehaviour {
     private void OnMouseExit()
     {
         CarteEnPreview = false;
-
+        System.Array.ForEach(cardCanvas, c => c.sortingOrder = 0);
         //rend la carte sous son scale initiale
         if (OnMouseLeaveACtion != null)
             //Si l'action leave n'est pas null elle est appelé

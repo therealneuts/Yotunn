@@ -30,7 +30,7 @@ public class RotationCarte : MonoBehaviour {
     Collider collider;
 
     //La position de la caméra.
-    public Transform cameraTransform;
+    Transform cameraTransform;
 
     enum CardFaces { Front, Back};
 

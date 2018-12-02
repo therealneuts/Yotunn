@@ -50,3 +50,6 @@ TagManager:
   - name: Carte
     uniqueID: 4259373615
     locked: 0
+  - name: Priority
+    uniqueID: 297822105
+    locked: 0
