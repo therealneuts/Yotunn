@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class ReserveMana : MonoBehaviour {
 
 
-
     [Header("Référenciez le nombre de mana default")]
     public int DefaultNombrePourTour;
     [Header("Pour les tests seulements")]

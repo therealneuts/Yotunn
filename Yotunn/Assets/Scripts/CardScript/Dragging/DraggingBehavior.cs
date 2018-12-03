@@ -34,7 +34,7 @@ public class DraggingBehavior : MonoBehaviour {
     {
         // https://docs.unity3d.com/ScriptReference/GameObject.GetComponent.html
         // GetComponent retourne un objet du type demandé à partir de la liste des objets qui composent un ensemble d'objet dans unity
-        anDraggable = GetComponent<DraggingAction>();
+        anDraggable = GetComponent<DraggingHerited>();
     }
 
     // Méthode de Monobehavior qui est appelé lorsque nous appuyons sur le boutton de la sourie par-dessus le gamObject

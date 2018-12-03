@@ -52,7 +52,6 @@ public class HandLayout : MonoBehaviour {
         {
             //Moyen primitif d'obtenir plus ou moins un série allant de -numChildren/2 à numChildren/2
             coefficient = i - ((numChildren -1) / 2f);
-            print(coefficient);
             //Les cartes sont placées autour de l'angle PI/2 sur le cercle.
             angle = (Mathf.PI / 2) + coefficient * radiansBetweenSegments;
 

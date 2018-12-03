@@ -18,7 +18,11 @@ public abstract class DraggingAction : MonoBehaviour {
     {
         get
         {
-            return true;
+            return CanDrag;
+        }
+        set
+        {
+            CanDrag = value;
         }
     }
 

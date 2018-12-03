@@ -8,10 +8,23 @@ using DG.Tweening;
 public class DraggingHerited : DraggingAction {
 
     [SerializeField] float duration = 0.2f;
-
+    public bool m_CanDrag = true;
     //Vector3 qui sauvegardera la position initiale du début du dragging
     private Vector3 v3PositionInitiale;
-    
+
+    [SerializeField]
+    public override bool CanDrag
+    {
+        get
+        {
+            return m_CanDrag;
+        }
+        set
+        {
+            m_CanDrag = value;
+        }
+    }
+
     //Override qui sauvegarde la position de départ avant le début du dragging afin de le remettre à ça position initiale
     //Soit dans la main du joueur ou à l'endroit ou la carte était dans le jeu
     public override void OnStartDrag()
