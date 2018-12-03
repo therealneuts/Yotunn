@@ -9,6 +9,26 @@ namespace Cards
 
     }
 
+    enum TurnFlowEventTargeting
+    {
+        Self,
+        Enemy,
+        Both
+    }
+
+    interface IHasEndStepAction
+    {
+        TurnFlowEventTargeting Targeting { get; }
+
+        void OnEndStep(Player currentPlayer);    }
+
+    interface IHasStartTurnAction
+    {
+        TurnFlowEventTargeting Targeting { get; }
+
+        void OnStartTurn(Player currentPlayer);
+    }
+
     interface IDefensive
     {
         int BaseArmor { get; }
