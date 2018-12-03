@@ -21,6 +21,7 @@ public class CartePreview : MonoBehaviour {
     Vector3 v3CarteScaleMult;
     //ici on applique le scale initiale dans l'éditeur
     Vector3 v3CarteInitialScale;
+    Quaternion initRotation;
 
     [Header("Besoin d'une carte ici")]
     public GameObject Carte; //Servira comme référence pour savoir si une est activé
@@ -47,17 +48,6 @@ public class CartePreview : MonoBehaviour {
         //Instancie un nouveau vecteur 3 selon les paramètres données
         //Celui-ci est donnée qu'une seul foix durant l'instance de cet objet
         v3CarteScaleMult = new Vector3(v3CarteInitialScale.x * flCarteScaleMult, v3CarteInitialScale.y * flCarteScaleMult, 1f);
-
-        //si has Preview est vrai
-        if (hasPreview)
-        {
-            //les instances de DelegateOnMouseOverAction vont pointer vers des
-            //méthode anonyme
-            //OnMouseOverAction += () => sequence.Append(CarteRectTransform.DOScale(v3CarteScaleMult, duration));
-            //OnMouseOverAction += () => sequence.Append(CarteRectTransform.DOLocalMoveY(transform.localPosition.y + direction*yOffset, duration));
-            //OnMouseLeaveACtion += () => sequence.Append(CarteRectTransform.DOScale(v3CarteInitialScale, duration));
-            //OnMouseLeaveACtion += () => sequence.Append(CarteRectTransform.DOLocalMoveY(transform.localPosition.y, duration));
-        }
     }
 
     //Cet événement est un événement qui à été passé du parent MonoBehaviour
@@ -65,6 +55,9 @@ public class CartePreview : MonoBehaviour {
     //par dessus un objet appellé collider du GameObject de la carte
     private void OnMouseEnter()
     {
+        //Prévient le fonctionnement du script lorsque le joueur tient le bouton gauche de la souris. Ceci prévient un bug qui se produit lorsque
+        //Le joueur bouge sa souris trop rapidement en déplaçant une carte.
+        if (Input.GetMouseButton(0)) { return; }
         //Donner un SortingOrder gigantesque à la carte assure qu'elle sera visible, même si d'autres objets sont plus près de la caméra.
         System.Array.ForEach(cardCanvas, c => c.sortingOrder = 255);
         StartCoroutine(BeginPreview());
@@ -74,8 +67,8 @@ public class CartePreview : MonoBehaviour {
     //Il vient aussi de la classe de base
     private void OnMouseExit()
     {
+        if (Input.GetMouseButton(0)) { return; }
         System.Array.ForEach(cardCanvas, c => c.sortingOrder = 0);
-
         StartCoroutine(EndPreview());
     }
 
@@ -85,6 +78,8 @@ public class CartePreview : MonoBehaviour {
         //Si elle est dans la partie inférieure du jeu, elle grossit vers le haut.
         int direction = transform.position.y > 0 ? -1 : 1;
 
+        initRotation = transform.rotation;
+
         //Crée une liste des objets Tween qui sont présentement en train de manipuler cet objet. Tant que l'objet est en train d'être manipulé, la coroutine se suspend.
         List<Tween> activeTweens = DOTween.TweensByTarget(transform, false);
         while (activeTweens != null)
@@ -93,17 +88,20 @@ public class CartePreview : MonoBehaviour {
             Tween longest = activeTweens.Where(t => t.Duration() == activeTweens.Max(tw => tw.Duration()))
                                         .First();
             yield return longest.WaitForCompletion();
+            //Refait une recherche pour les objets qui sont en train de manipuler cet objet.
             activeTweens = DOTween.TweensByTarget(transform, false);
         }
 
         //Applique les manipulations à la carte.
         CarteRectTransform.DOScale(v3CarteScaleMult, duration);
+        CarteRectTransform.DORotate(Vector3.zero, duration);
         CarteRectTransform.DOLocalMoveY(transform.localPosition.y + direction * yOffset, duration);
     }
 
     IEnumerator EndPreview()
     {
         CarteRectTransform.DOScale(v3CarteInitialScale, duration);
+        CarteRectTransform.DORotate(initRotation.eulerAngles, duration);
         List<Tween> activeTweens = DOTween.TweensByTarget(transform, false);
         while (activeTweens != null)
         {

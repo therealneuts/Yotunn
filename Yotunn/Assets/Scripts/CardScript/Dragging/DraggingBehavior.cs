@@ -24,6 +24,8 @@ public class DraggingBehavior : MonoBehaviour {
     // Indique le Z en coordonné dans le plan de jeu du curseur par rapport à la vue de la camera de la scene
     private float flIndicZ;
 
+    Vector3 draggingOffset;
+
     // Méthode de monobehavior
     // Cette méthode est appelé une seul fois pendant la duré de vie de l'instance de script
     // Une fois que tous les objets qui composent le gameObject de unity soit initialisés
@@ -38,9 +40,17 @@ public class DraggingBehavior : MonoBehaviour {
     // Méthode de Monobehavior qui est appelé lorsque nous appuyons sur le boutton de la sourie par-dessus le gamObject
     private void OnMouseDown()
     {
+        Ray ray = Camera.main.ViewportPointToRay(Input.mousePosition);
+        RaycastHit rch;
+
         // Si le CanDrag est vrai, cela voudrait dire que nous pouvons réaliser les actions de bouger le gameObject
         if (anDraggable.CanDrag)
         {
+            if (Physics.Raycast(ray, out rch))
+            {
+                draggingOffset = transform.position - rch.point;
+
+            }
             // Flag a l'object que nous sommes entrain de bouger l'objet
             boDragging = true;
             
@@ -54,7 +64,7 @@ public class DraggingBehavior : MonoBehaviour {
     }
 
     // Méthode de Monobehavior qui est appelé à chaque (frame)
-    private void Update()
+    private void FixedUpdate()
     {
         if (boDragging)
         {
@@ -66,13 +76,12 @@ public class DraggingBehavior : MonoBehaviour {
 
             // Représente un point en 3 dimension qui sauvegarde les coordonnés de la sourie selon la vue de la camera
             Vector3 v3PositionSourie = Camera.main.ScreenToWorldPoint(CurseurPositionCamera);
-
             // Appelé pour performer à chaque frame 
             anDraggable.OnDraggingInUpdate();
-
             // transform est une propriété pour toute game object (voir haut)
-            // nous updastons la position de l'objet selon un nouveau vecteur crée selon la position du curseur 
-            this.transform.position = new Vector3(v3PositionSourie.x, v3PositionSourie.y, -1f);
+            // nous updastons la position de l'objet selon un nouveau vecteur crée selon la position du curseur
+            Vector3 newPos = v3PositionSourie + draggingOffset;
+            this.transform.position = newPos;
         }
     }
 

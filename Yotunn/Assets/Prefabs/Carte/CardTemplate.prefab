@@ -535,8 +535,8 @@ MonoBehaviour:
   flCarteScaleMult: 2
   Carte: {fileID: 1410293490512752}
   CarteRectTransform: {fileID: 224428777407725036}
-  yOffset: 2
-  duration: 0.1
+  yOffset: 1
+  duration: 0.5
 --- !u!114 &114067200956776074
 MonoBehaviour:
   m_ObjectHideFlags: 1
