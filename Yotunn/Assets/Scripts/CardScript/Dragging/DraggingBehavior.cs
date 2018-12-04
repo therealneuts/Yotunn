@@ -40,7 +40,7 @@ public class DraggingBehavior : MonoBehaviour {
     // Méthode de Monobehavior qui est appelé lorsque nous appuyons sur le boutton de la sourie par-dessus le gamObject
     private void OnMouseDown()
     {
-        Ray ray = Camera.main.ViewportPointToRay(Input.mousePosition);
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit rch;
 
         // Si le CanDrag est vrai, cela voudrait dire que nous pouvons réaliser les actions de bouger le gameObject
@@ -49,6 +49,7 @@ public class DraggingBehavior : MonoBehaviour {
             if (Physics.Raycast(ray, out rch))
             {
                 draggingOffset = transform.position - rch.point;
+                print(transform.position + "\n" + rch.point);
 
             }
             // Flag a l'object que nous sommes entrain de bouger l'objet
@@ -81,7 +82,7 @@ public class DraggingBehavior : MonoBehaviour {
             // transform est une propriété pour toute game object (voir haut)
             // nous updastons la position de l'objet selon un nouveau vecteur crée selon la position du curseur
             Vector3 newPos = v3PositionSourie + draggingOffset;
-            this.transform.position = newPos;
+            transform.position = newPos;
         }
     }
 
@@ -95,5 +96,10 @@ public class DraggingBehavior : MonoBehaviour {
             //Appelle la méthode de terminaison de bougemant de carte
             anDraggable.OnEndDrag();
         }
+    }
+
+    private Vector3 MousePosToWorldSpace()
+    {
+        return Camera.main.ScreenToWorldPoint(Input.mousePosition);
     }
 }//Yan

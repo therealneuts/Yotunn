@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 
 /// <summary>
@@ -24,7 +26,38 @@ public class HandLayout : MonoBehaviour {
     List<Transform> trimmedSlots = new List<Transform>();
 
 
-    void Start () {
+    void Start ()
+    {
+        ArrangeCards();
+    }
+
+    public void AddCardToHand(Transform card)
+    {
+
+        if (trimmedSlots.Count == slots.Length)
+        {
+            HandIsFull();
+            return;
+        }
+
+        foreach (Transform slot in slots)
+        {
+            if (slot.GetComponentInChildren<CardManager>() == null)
+            {
+                card.SetParent(slot);
+            }
+        }
+
+        card.DOMove(card.transform.parent.position, 1f);
+    }
+
+    private void HandIsFull()
+    {
+        //TODO implement
+    }
+
+    private void ArrangeCards()
+    {
         //Les lots vides de cartes ne sont pas considérés.
         foreach (Transform slot in slots)
         {
@@ -51,7 +84,7 @@ public class HandLayout : MonoBehaviour {
         for (int i = 0; i < numChildren; i++)
         {
             //Moyen primitif d'obtenir plus ou moins un série allant de -numChildren/2 à numChildren/2
-            coefficient = i - ((numChildren -1) / 2f);
+            coefficient = i - ((numChildren - 1) / 2f);
             //Les cartes sont placées autour de l'angle PI/2 sur le cercle.
             angle = (Mathf.PI / 2) + coefficient * radiansBetweenSegments;
 
@@ -68,6 +101,6 @@ public class HandLayout : MonoBehaviour {
             trimmedSlots[i].rotation = Quaternion.Euler(new Vector3(0f, 0f, Mathf.Rad2Deg * angle - 90f));
         }
     }
-	
-	//-Alex C.
+
+    //-Alex C.
 }
