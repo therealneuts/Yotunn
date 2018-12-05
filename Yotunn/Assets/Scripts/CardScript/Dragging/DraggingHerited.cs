@@ -37,8 +37,9 @@ public class SkillDraggingBehavior : DraggingAction {
                 break;
             case TargetingOptions.YourCreatures:
                 targetPlayer = cardBeingDragged.Owner;
-                break
+                break;
             default:
+                throw new System.Exception("Unexpected tageting mode");
 
         }
         //DOMove change la position en fesant une transition à l'objet dans le jeu vers la position donnée au premier paramètre

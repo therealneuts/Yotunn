@@ -6,7 +6,7 @@ using Cards;
 public class Player : MonoBehaviour {
 
 
-    string m_Name { get; set; }
+    public string m_Name { get; set; }
     Hand m_Hand { get; set; }
 
     CardManager _avatar;
