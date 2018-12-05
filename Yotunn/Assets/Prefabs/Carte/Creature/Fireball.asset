@@ -11,13 +11,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9703bf8d70890864a887f86ce820bc09, type: 3}
   m_Name: Fireball
   m_EditorClassIdentifier: 
-  RessourceJoueurCharacter: {fileID: 0}
   Description: 
   ImageRessource: {fileID: 21300000, guid: 8b30469d873460048aed1ff18627fc1f, type: 3}
   CoutMana: 3
   type: 2
   cardScript: Fireball
-  MaxHealth: 0
   Power: 5
-  AttacksForOneTurn: 1
-  Targets: 2
+  MaxHealth: 0
+  Targets: 0

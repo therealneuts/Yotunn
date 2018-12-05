@@ -88,6 +88,7 @@ public class GameController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         Joueurs = new Duel(GlobalSettings.instance.player1, GlobalSettings.instance.player2);
+        Battlefield.Players = Joueurs;
         CurrentPlayer = GlobalSettings.instance.player1;
         instance = this;
     }
