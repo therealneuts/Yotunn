@@ -765,7 +765,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cf376ca469eb8946a785a407b0fd79f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardAsset: {fileID: 11400000, guid: 5f566cc1b6ab53645a15c7602786e369, type: 2}
+  cardAsset: {fileID: 11400000, guid: 7ab61ade76a757743ac61afc7e7b002f, type: 2}
   CartePreview: {fileID: 0}
   ImageCarteGraphique: {fileID: 114265378101255828}
   ImageCorps: {fileID: 114770611895551612}

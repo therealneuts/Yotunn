@@ -15,7 +15,7 @@ public class CardHealth : MonoBehaviour {
 	void Start () {
         //Assignation des références.
         cardManager = GetComponentInParent<CardManager>();
-        healthText = GetComponent<TextMeshProUGUI>();
+        healthText = GetComponentInChildren<TextMeshProUGUI>();
 
         Carte type = cardManager.CardScript;
         if (type is Cards.Entity)
