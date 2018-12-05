@@ -260,6 +260,7 @@ GameObject:
   - component: {fileID: 114619560445266548}
   - component: {fileID: 114241344295201838}
   - component: {fileID: 114042630030836060}
+  - component: {fileID: 114125338266043816}
   m_Layer: 0
   m_Name: CardTemplate
   m_TagString: Untagged
@@ -678,6 +679,17 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114125338266043816
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1410293490512752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5edda756c49dff24eab7775dea79d5dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114137002146647796
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1260,8 +1272,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fcb6705c0a478841a7c3c2ac928554b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cardBeingDragged: {fileID: 0}
   duration: 0.2
-  m_CanDrag: 1
 --- !u!114 &114657776755508244
 MonoBehaviour:
   m_ObjectHideFlags: 1

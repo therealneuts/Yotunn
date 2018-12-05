@@ -6,12 +6,27 @@ public enum PlayerZones { Bottom, Top }
 
 public class PlayerArea : MonoBehaviour {
 
-
+    public PlayerZones zone;
+    Player _owner;
     HandLayout handlayout;
 
-	// Use this for initialization
-	void Start () {
-		
+    public Player Owner
+    {
+        get
+        {
+            return _owner;
+        }
+
+        set
+        {
+            _owner = value;
+        }
+    }
+
+    // Use this for initialization
+    void Start () {
+        Owner = GetComponent<Player>();
+        handlayout = GetComponentInChildren<HandLayout>();
 	}
 	
 	// Update is called once per frame
