@@ -4,7 +4,7 @@ using Cards;
 
 namespace Cards
 {
-    internal static class Battlefield
+    public static class Battlefield
     {
         internal static Duel Players;
 
@@ -58,68 +58,8 @@ namespace Cards
         }
     }
 
-    class Player
-    {
-        string m_Name { get; set; }
-        Hand m_Hand { get; set; }
 
-        CardManager _avatar;
-
-        public CardManager Avatar
-        {
-            get
-            {
-                return _avatar;
-            }
-
-            set
-            {
-                _avatar = value;
-            }
-        }
-
-        private Deck _deck;
-
-        public Deck Deck
-        {
-            get { return _deck; }
-        }
-
-        public Player Enemy { get { return Battlefield.Players.GetOtherPlayer(this); } }
-
-
-        public delegate void CardPlayedHandler(Player source, IPlayable carte);
-
-        public event CardPlayedHandler CardPlayed;
-
-        public Player(string Name, Hand Main, Deck deck)
-        {
-            m_Name = Name;
-            m_Hand = Main;
-            _deck = deck;
-        }
-
-        public Player(String Name, Deck Librairie)
-        {
-            m_Name = Name;
-            _deck = Librairie;
-        }
-
-        public void Draw(int Pige)
-        {
-
-        }
-
-        public void Play(IPlayable card)
-        {
-            card.Play();
-            if (CardPlayed != null)
-            {
-                CardPlayed(this, card);
-            }
-        }
-    }
-    internal class Duel
+    public class Duel
     {
         Player _player1;
         Player _player2;

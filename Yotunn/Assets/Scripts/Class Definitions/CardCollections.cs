@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Cards
 {
-    internal class Hand
+    public class Hand
     {
 
         private List<Carte> _lsCartes;
@@ -36,7 +36,7 @@ namespace Cards
         }
     }
 
-    class Deck
+    public class Deck
     {
         Stack<Carte> Cartes = new Stack<Carte>();
 

@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(DraggingHerited))]
-public class DraggingBehavior : MonoBehaviour {
+
+public class Draggable : MonoBehaviour {
 
     //Afin de comprendre le code:
     //Un gameObject est l'objet auquel le composant est attaché, ex: DraggingBehavior est attaché a une carte, 
@@ -34,7 +34,7 @@ public class DraggingBehavior : MonoBehaviour {
     {
         // https://docs.unity3d.com/ScriptReference/GameObject.GetComponent.html
         // GetComponent retourne un objet du type demandé à partir de la liste des objets qui composent un ensemble d'objet dans unity
-        anDraggable = GetComponent<DraggingHerited>();
+        anDraggable = GetComponent<DraggingAction>();
     }
 
     // Méthode de Monobehavior qui est appelé lorsque nous appuyons sur le boutton de la sourie par-dessus le gamObject
@@ -44,7 +44,7 @@ public class DraggingBehavior : MonoBehaviour {
         RaycastHit rch;
 
         // Si le CanDrag est vrai, cela voudrait dire que nous pouvons réaliser les actions de bouger le gameObject
-        if (anDraggable.CanDrag)
+        if (anDraggable != null && anDraggable.CanDrag)
         {
             if (Physics.Raycast(ray, out rch))
             {

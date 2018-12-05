@@ -102,6 +102,7 @@ GameObject:
   - component: {fileID: 224118988278071338}
   - component: {fileID: 222595948755746832}
   - component: {fileID: 114276657799633804}
+  - component: {fileID: 114187500719046906}
   m_Layer: 0
   m_Name: CardPower
   m_TagString: Untagged
@@ -238,7 +239,6 @@ GameObject:
   - component: {fileID: 224578036095264644}
   - component: {fileID: 222226527612332302}
   - component: {fileID: 114341063979725408}
-  - component: {fileID: 114764948680953590}
   m_Layer: 0
   m_Name: Card Power TMP
   m_TagString: Untagged
@@ -292,6 +292,7 @@ GameObject:
   - component: {fileID: 224946834387081278}
   - component: {fileID: 222861332710835380}
   - component: {fileID: 114033342940522020}
+  - component: {fileID: 114657776755508244}
   m_Layer: 0
   m_Name: CardHP
   m_TagString: Untagged
@@ -432,7 +433,6 @@ GameObject:
   - component: {fileID: 224313752081823320}
   - component: {fileID: 222589138485391986}
   - component: {fileID: 114067200956776074}
-  - component: {fileID: 114239406322468934}
   m_Layer: 0
   m_Name: Card Health TMP
   m_TagString: Untagged
@@ -705,6 +705,17 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114187500719046906
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1189161743045554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cabfa712e337ec4da69fc2288c80e34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114193834198837498
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -741,17 +752,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b69111593a6f1114dab90cf653a297b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114239406322468934
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1991006981014464}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75a4f8224ba39b94790ec3237221526e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114241344295201838
@@ -1262,6 +1262,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   duration: 0.2
   m_CanDrag: 1
+--- !u!114 &114657776755508244
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1576000395329172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75a4f8224ba39b94790ec3237221526e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114737271173858842
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1403,17 +1414,6 @@ MonoBehaviour:
   - {fileID: 0}
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &114764948680953590
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1389879578252534}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4cabfa712e337ec4da69fc2288c80e34, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114766197215987218
 MonoBehaviour:
   m_ObjectHideFlags: 1

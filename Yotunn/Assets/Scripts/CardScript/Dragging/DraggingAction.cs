@@ -4,6 +4,8 @@ using UnityEngine;
 
 // Classe abstraite qui définira ce qu'un objet dérivé de la classe abstraite doit implimenter
 public abstract class DraggingAction : MonoBehaviour {
+
+    public CardManager cardBeingDragged;
     // Méthode qui devra être appellé lorsque le joueur essait de bouger la carte
     public abstract void OnStartDrag();
 
@@ -18,15 +20,26 @@ public abstract class DraggingAction : MonoBehaviour {
     {
         get
         {
-            return CanDrag;
-        }
-        set
-        {
-            CanDrag = value;
+            return cardBeingDragged.Owner == GameController.instance.CurrentPlayer;
         }
     }
 
     // Méthode qui retourne une bool qui nous dira si la carte que nous avons essayé de bougé à réussi à atteindre la destination
     protected abstract bool DragSuccessful();
+
+    public virtual void Awake()
+    {
+        cardBeingDragged = GetComponent<CardManager>();
+    }
+
+    protected void DrawLine()
+    {
+        //TODO Implement crosshair and line.
+    }
+
+    protected void DragCard()
+    {
+
+    }
 }
 

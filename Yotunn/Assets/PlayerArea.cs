@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
+public enum PlayerZones { Bottom, Top }
 
 public class PlayerArea : MonoBehaviour {
 

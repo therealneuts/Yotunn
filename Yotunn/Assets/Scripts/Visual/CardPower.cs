@@ -19,7 +19,7 @@ public class CardPower : MonoBehaviour {
 
         //Assignation des références.
         cardManager = GetComponentInParent<CardManager>();
-        powerText = GetComponent<TextMeshProUGUI>();
+        powerText = GetComponentInChildren<TextMeshProUGUI>();
         //avatar = cardManager.Avatar;
         type = cardManager.CardScript;
 

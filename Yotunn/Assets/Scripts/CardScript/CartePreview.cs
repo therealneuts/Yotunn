@@ -72,6 +72,18 @@ public class CartePreview : MonoBehaviour {
         StartCoroutine(EndPreview());
     }
 
+    private void OnMouseDown()
+    {
+        StartCoroutine(EndPreview());
+        initRotation = transform.rotation;
+        CarteRectTransform.DORotate(Vector3.zero, duration);
+    }
+
+    private void OnMouseUp()
+    {
+        CarteRectTransform.DORotate(initRotation.eulerAngles, duration);
+    }
+
     IEnumerator BeginPreview()
     {
         //y = 0 est la ligne du milieu du jeu. Si la carte est dans la partie supérieure du jeu (joueur 2), elle grossit vers le bas.

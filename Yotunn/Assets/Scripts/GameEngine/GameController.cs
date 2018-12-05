@@ -5,7 +5,7 @@ using Cards;
 
 public class GameController : MonoBehaviour {
 
-    new Duel Joueurs;
+    Duel Joueurs;
 
     private Player _CurrentPlayer;
     internal Player CurrentPlayer
@@ -22,6 +22,8 @@ public class GameController : MonoBehaviour {
            
         }
     }
+
+    public static GameController instance;
 
     public void OnGameStart()
     {
@@ -79,12 +81,14 @@ public class GameController : MonoBehaviour {
     
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+        Joueurs = new Duel(GlobalSettings.instance.player1, GlobalSettings.instance.player2);
+        CurrentPlayer = GlobalSettings.instance.player1;
+        instance = this;
+    }
 }

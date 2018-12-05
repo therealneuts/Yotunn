@@ -184,7 +184,6 @@ public class CardManager : MonoBehaviour {
         if (cardAsset != null)
         {
             //Les méthodes qui insèrent toute l'information de la carte ressource dans la carte instanciée.
-            CarteRessourceToGameGraphique();
             InitializeValues();
         }
     }
@@ -206,7 +205,7 @@ public class CardManager : MonoBehaviour {
         //Nous somme malheureusement forcés d'utiliser une référence en chaîne de caractères littérale pour indiquer le script C# relié à la carte instanciée.
         //Ce bout de code à l'effet de s'assurer que le nom du script a été bien écrit (il doit être identique au nom de la classe C# associé à la carte).
         //Si le nom a êté mal écrit (ou si un script non-relié à la classe Carte est donné), le jeu lancera une exception.
-
+        Owner = GetComponentInParent<Player>();
         //Premièrement, on récupère le type du script en utilisant la méthode .NET qui recherche un type dans l'assembly qui correspond à une chaîne de caractères.
         Type cardType = System.Type.GetType(cardAsset.cardScript);
         //Ensuite, on vérifie que ce type est un sous-type de Carte. Cette méthode donnerait faux si le type est précisément Carte, mais serait le résultat d'une
@@ -248,42 +247,7 @@ public class CardManager : MonoBehaviour {
             Initialized();
         }
     }
- 
-    public void CarteRessourceToGameGraphique()
-    {
-        //Sera fait pour toutes les cartes
-        
-        if (cardAsset.RessourceJoueurCharacter != null)
-        {
-            //Si CharacterAsset n'est pas null cela veut dire que c'est un character, alors nous mettons de la couleur
-            //lesquelles sont prédéfini selon une classe Color32 une classe d'Unity qui représente des couleurs en format 32 bit
-            //et laquelles est défini par la classe de character
-            //Cela change tout le look et le feel de la classe
-            ImageCorps.color = cardAsset.RessourceJoueurCharacter.ClassCardTint;
-            ImageDevantFrame.color = cardAsset.RessourceJoueurCharacter.ClassCardTint;
-        }
-        else
-        {
-            //ImageCorps.color = GlobalSettings.Instance.CardBodyStandardColor;
-            ImageDevantFrame.color = Color.white;
-            //ImageRubanHaut.color = GlobalSettings.Instance.CardRibbonsStandardColor;
-            //CardLowRibbonImage.color = GlobalSettings.Instance.CardRibbonsStandardColor;
 
-            //Si n'est pas un character asset mettre le type de la carte
-        }
-
-
-        //si le CartePreview est null donc nous savons que celui-ci est un l'objet
-        //de la carte et non le deuxième instancié
-        if (CartePreview != null)
-        {
-            //Afin que nous n'ayons pas une boucle qui ne finirait jamais 
-            //le preview devrait avoir un CarteRessourceEnGameObject aussi, mais celui-ci devrait être null
-            CartePreview.cardAsset = cardAsset;
-            //Appeler la  méthode readCardFromAsset() du preview
-            CartePreview.CarteRessourceToGameGraphique();
-        }
-    }
 
     private void Discard()
     {

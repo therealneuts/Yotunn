@@ -4,32 +4,32 @@ using System.Text;
 
 namespace Cards
 {
-    interface IDamaging
+    public interface IDamaging
     {
 
     }
 
-    enum TurnFlowEventTargeting
+    public enum TurnFlowEventTargeting
     {
         Self,
         Enemy,
         Both
     }
 
-    interface IHasEndStepAction
+    public interface IHasEndStepAction
     {
         TurnFlowEventTargeting Targeting { get; }
 
         void OnEndStep(Player currentPlayer);    }
 
-    interface IHasStartTurnAction
+    public interface IHasStartTurnAction
     {
         TurnFlowEventTargeting Targeting { get; }
 
         void OnStartTurn(Player currentPlayer);
     }
 
-    interface IDefensive
+    public interface IDefensive
     {
         int BaseArmor { get; }
         int Armor { get; set; }
@@ -37,7 +37,7 @@ namespace Cards
 
     enum TargetMode { Ally, Enemy, Both }
 
-    interface ITargeted
+    public interface ITargeted
     {
         System.Type TargetType { get; }
         int TargetNum { get; }
@@ -50,17 +50,17 @@ namespace Cards
 
     }
 
-    interface IAttacker
+    public interface IAttacker
     {
         void Attack();
     }
 
-    interface IPlayable
+    public interface IPlayable
     {
         void Play();
     }
 
-    interface IPermanent
+    public interface IPermanent
     {
         //todo position
     }
