@@ -25,6 +25,7 @@ public class GlobalSettings : MonoBehaviour {
         players.Add(PlayerZones.Bottom, player1);
         players.Add(PlayerZones.Top, player2);
         instance = this;
+
 	}
 	
     
