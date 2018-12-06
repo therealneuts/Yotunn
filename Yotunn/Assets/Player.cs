@@ -7,7 +7,7 @@ public class Player : MonoBehaviour {
 
 
     public string m_Name { get; set; }
-    Hand m_Hand { get; set; }
+    List<CardManager> m_Hand { get; set; }
 
     CardManager _avatar;
 

@@ -3,38 +3,38 @@ using System.Collections.Generic;
 
 namespace Cards
 {
-    public class Hand
-    {
+    //public class List<CardManager>
+    //{
 
-        private List<Carte> _lsCartes;
-        public List<Carte> lsCartes
-        {
-            get { return _lsCartes; }
-        }
+    //    private List<Carte> _lsCartes;
+    //    public List<Carte> lsCartes
+    //    {
+    //        get { return _lsCartes; }
+    //    }
 
-        public Hand(List<Carte> pLsCartes)
-        {
-            _lsCartes = new List<Carte>(pLsCartes);
-        }
-        public Hand()
-        {
-            _lsCartes = new List<Carte>();
-        }
+    //    public List<CardManager>(List<Carte> pLsCartes)
+    //    {
+    //        _lsCartes = new List<Carte>(pLsCartes);
+    //    }
+    //    public List<CardManager>()
+    //    {
+    //        _lsCartes = new List<Carte>();
+    //    }
 
-        //Surcharge de l'opérateur +. Avec ceci, Hand + Carte et Hand += Carte retournent la main avec la carte ajoutée.
-        public static Hand operator +(Hand hand, Carte newCard)
-        {
-            hand._lsCartes.Add(newCard);
+    //    //Surcharge de l'opérateur +. Avec ceci, List<CardManager> + Carte et List<CardManager> += Carte retournent la main avec la carte ajoutée.
+    //    public static List<CardManager> operator +(List<CardManager> hand, Carte newCard)
+    //    {
+    //        hand._lsCartes.Add(newCard);
 
-            return hand;
-        }
+    //        return hand;
+    //    }
 
-        public Carte SelectCard()
-        {
-            //TODO implement actual selection mechanics.
-            throw new NotImplementedException();
-        }
-    }
+    //    public Carte SelectCard()
+    //    {
+    //        //TODO implement actual selection mechanics.
+    //        throw new NotImplementedException();
+    //    }
+    //}
 
     public class Deck
     {

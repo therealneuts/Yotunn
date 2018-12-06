@@ -43,9 +43,9 @@ namespace Cards
         int TargetNum { get; }
         bool TargetPredicate(Carte carte);
 
-        Hand LegalTargets { get; }
+        List<CardManager> LegalTargets { get; }
 
-        Hand SelectTargets();
+        List<CardManager> SelectTargets();
 
 
     }

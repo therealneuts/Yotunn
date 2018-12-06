@@ -2,26 +2,40 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Cards;
+using DG.Tweening;
+using System.Threading; //implimentation de threading
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour {
 
+    //Référence pour le text qui dit à qui est le tour
+    [Header("Mettre la référence du texte message ici")]
+    public GameObject CadreJoueur1;
+    public GameObject CadreJoueur2;
+
     Duel Joueurs;
 
-    private Player _CurrentPlayer;
-    internal Player CurrentPlayer
+    private Player m_CurrentPlayer;
+    public Player CurrentPlayer
     {
         get
         {
-            return _CurrentPlayer;
+           
+            return m_CurrentPlayer;
         }
 
         set
         {
-            _CurrentPlayer = value;
+            //Cadre l'icone joueur
 
-           
+            m_CurrentPlayer = value;
+            //Shuffle les deck
+
+            //Appelle toute les UpKeep des cartes du current Player
+            Upkeep();
         }
     }
+
 
     public static GameController instance;
 
@@ -38,39 +52,39 @@ public class GameController : MonoBehaviour {
 
     }
 
-    internal void Upkeep(Player CurrentPlayer)
+    public void Upkeep()
     {
-        Hand cards = Battlefield.GetPermanentsWhere(delegate (Carte carte)
-        {
-            return (carte is IHasStartTurnAction);
-        }); 
+                    
+        List<CardManager> cards = Battlefield.GetPermanentsWhere((Carte c) => { return c is IHasStartTurnAction;}); //Une main est retourné 
 
-        foreach (Carte card in cards.lsCartes)
+        foreach (CardManager card in cards)
         {
             StartTurn += (card as IHasStartTurnAction).OnStartTurn;
         }
+        if (StartTurn != null)
+            StartTurn(CurrentPlayer);
 
+
+        StartTurn = null;
         //CurrentPlayer pige X Cartes
     }
 
     
-
-    internal void EndTurn(Player Current)
+    /// <summary>
+    /// La méthode est appelé lorsqu'un joueur presse sur le boutton end turn
+    /// </summary>
+    public void EndTurn()
     {
-        Hand cards = Battlefield.GetPermanentsWhere(delegate (Carte carte)
-        {
-            return (carte is IHasEndStepAction);
-        });
+        List<CardManager> cards = Battlefield.GetPermanentsWhere((Carte c) => { return (c is IHasEndStepAction); });
 
-        foreach (Carte card in cards.lsCartes)
+        foreach (CardManager card in cards)
         {
             StartTurn += (card as IHasEndStepAction).OnEndStep;
         }
 
         //Perdre cartes en mains
         //Change le Current player avec CurrentPlayer.GetEnemy
-        //appelle Upkeep avec le nouveau CurrentPlayer en paramètre
-        //Shuffle les deck
+        CurrentPlayer = CurrentPlayer.Enemy;
     }
 
     internal delegate void StartTurnAction(Player CurrentPlayer);
@@ -82,14 +96,13 @@ public class GameController : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
-
-	}
-	
-	// Update is called once per frame
-	void Update () {
         Joueurs = new Duel(GlobalSettings.instance.player1, GlobalSettings.instance.player2);
         Battlefield.Players = Joueurs;
         CurrentPlayer = GlobalSettings.instance.player1;
         instance = this;
+    }
+
+    // Update is called once per frame
+    void Update () {
     }
 }

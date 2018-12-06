@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 using Cards;
 
 namespace Cards
@@ -8,54 +9,65 @@ namespace Cards
     {
         internal static Duel Players;
 
-        internal static Hand lstPermanents;
-
-        internal static Hand Permanents { get { return lstPermanents; } }
-
-        internal static Hand GetPermanentsOfType<T>()
+        internal static List<CardManager> lstPermanents
         {
-            Hand result = new Hand();
-
-            foreach (Carte carte in lstPermanents.lsCartes)
+            get
             {
-                if (carte is T)
+                BattlegroundLayout[] playerAreas = UnityEngine.Object.FindObjectsOfType<BattlegroundLayout>();
+                List<CardManager> permanents = new List<CardManager>();
+                foreach (BattlegroundLayout playerArea in playerAreas)
                 {
-                    result += carte;
+                    CardManager[] cards = playerArea.GetComponentsInChildren<CardManager>();
+                    permanents.AddRange(cards);
+                }
+
+                return permanents;
+            }
+        }
+
+        internal static List<CardManager> GetPermanentsOfType<T>()
+        {
+            List<CardManager> result = new List<CardManager>();
+
+            foreach (CardManager carte in lstPermanents)
+            {
+                if (carte.CardScript is T)
+                {
+                    result.Add(carte);
                 }
             }
             return result;
         }
 
-        internal static Hand GetPermanentsWhere(Func<Carte, bool> predicate)
+        internal static List<CardManager> GetPermanentsWhere(Func<Carte, bool> predicate)
         {
-            Hand result = new Hand();
-
-
-            foreach (Carte carte in lstPermanents.lsCartes)
+            List<CardManager> result = new List<CardManager>();
+            
+            foreach (CardManager carte in lstPermanents)
             {
-                if (predicate(carte) == true)
+                if (predicate(carte.CardScript) == true)
                 {
-                    result += carte;
+                    result.Add(carte);
                 }
             }
             return result;
         }
 
-        internal static Hand FindCards<T>(Hand location)
-        {
-            Hand result = new Hand();
+        //internal static List<CardManager> FindCards<T>(List<CardManager> location)
+        //{
+        //    List<CardManager> result = new List<CardManager>();
 
 
-            foreach (Carte carte in location.lsCartes)
-            {
-                if (carte is T)
-                {
-                    result += carte;
-                }
-            }
+        //    foreach (Carte carte in location.lsCartes)
+        //    {
+        //        if (carte is T)
+        //        {
+        //            result += carte;
+        //        }
+        //    }
 
-            return result;
-        }
+        //    return result;
+        //}
     }
 
 
