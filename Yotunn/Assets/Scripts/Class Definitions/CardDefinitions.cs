@@ -21,13 +21,13 @@ namespace Cards
 
     public class Boost : Carte, IPermanent, IPlayable
     {
-        public virtual void Play() { }
+        public virtual void Play(CardManager target = null) { }
     }
 
     public class Creature : Entity, IPlayable, IAttacker
     {
         public virtual void Attack() { }
-        public virtual void Play() { }
+        public virtual void Play(CardManager target = null) { }
     }
 
     public class Avatar : Entity
@@ -37,7 +37,7 @@ namespace Cards
 
     public class Skill : Carte, IPlayable
     {
-        public virtual void Play() { }
+        public virtual void Play(CardManager target = null) { }
     }
 
 }

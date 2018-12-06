@@ -249,10 +249,18 @@ public class CardManager : MonoBehaviour {
     }
 
 
-    private void Discard()
+    public void Discard()
     {
         //TODO implement discarding.
-        throw new NotImplementedException();
+
+    }
+
+    public void Play(CardManager target = null)
+    {
+        if (CardScript is IPlayable)
+        {
+            (CardScript as IPlayable).Play(target);
+        }
     }
 }
 

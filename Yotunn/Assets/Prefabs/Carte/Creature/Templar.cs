@@ -7,15 +7,12 @@ using System;
 [Serializable]
 public class Templar : Creature, IDamaging
     {
-
-	protected override void Start()
+    public int Power
     {
-        base.Start();
-        cardManager.Power++;
+        get
+        {
+            return cardManager.Power;
+        }
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
 }

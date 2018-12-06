@@ -49,7 +49,6 @@ public class Draggable : MonoBehaviour {
             if (Physics.Raycast(ray, out rch))
             {
                 draggingOffset = transform.position - rch.point;
-                print(transform.position + "\n" + rch.point);
 
             }
             // Flag a l'object que nous sommes entrain de bouger l'objet

@@ -6,7 +6,7 @@ namespace Cards
 {
     public interface IDamaging
     {
-
+        int Power { get;}
     }
 
     public enum TurnFlowEventTargeting
@@ -57,7 +57,7 @@ namespace Cards
 
     public interface IPlayable
     {
-        void Play();
+        void Play(CardManager target = null);
     }
 
     public interface IPermanent

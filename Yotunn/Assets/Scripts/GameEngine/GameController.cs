@@ -101,8 +101,4 @@ public class GameController : MonoBehaviour {
         CurrentPlayer = GlobalSettings.instance.player1;
         instance = this;
     }
-
-    // Update is called once per frame
-    void Update () {
-    }
 }
