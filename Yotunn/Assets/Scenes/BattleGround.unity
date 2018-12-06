@@ -5133,6 +5133,12 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114241344295201838, guid: 5d4ce9897a676e1478d1f5160a44b8fc,
+        type: 2}
+      propertyPath: cardAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 5f566cc1b6ab53645a15c7602786e369,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d4ce9897a676e1478d1f5160a44b8fc, type: 2}
   m_IsPrefabAsset: 0

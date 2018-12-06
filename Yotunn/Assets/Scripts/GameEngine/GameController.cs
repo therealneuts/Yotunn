@@ -82,14 +82,14 @@ public class GameController : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
-
-	}
-	
-	// Update is called once per frame
-	void Update () {
         Joueurs = new Duel(GlobalSettings.instance.player1, GlobalSettings.instance.player2);
         Battlefield.Players = Joueurs;
         CurrentPlayer = GlobalSettings.instance.player1;
         instance = this;
+    }
+	
+	// Update is called once per frame
+	void Update () {
+
     }
 }
