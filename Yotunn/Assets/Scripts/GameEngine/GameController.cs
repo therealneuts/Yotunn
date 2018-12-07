@@ -39,6 +39,12 @@ public class GameController : MonoBehaviour {
 
     public static GameController instance;
 
+    internal delegate void StartTurnAction(Player CurrentPlayer);
+    internal delegate void EndStepAction(Player CurrentPlayer);
+
+    internal event StartTurnAction StartTurn;
+    internal event EndStepAction EndStep;
+
     public void OnGameStart()
     {
         //Reset
@@ -51,6 +57,8 @@ public class GameController : MonoBehaviour {
     //}
 
     }
+
+
 
     public void Upkeep()
     {
@@ -86,12 +94,6 @@ public class GameController : MonoBehaviour {
         //Change le Current player avec CurrentPlayer.GetEnemy
         CurrentPlayer = CurrentPlayer.Enemy;
     }
-
-    internal delegate void StartTurnAction(Player CurrentPlayer);
-    internal delegate void EndStepAction(Player CurrentPlayer);
-
-    internal event StartTurnAction StartTurn;
-    internal event EndStepAction EndStep;
     
 
 	// Use this for initialization

@@ -58,7 +58,7 @@ public class DragTarget : MonoBehaviour {
 		if (GetComponentInParent<CardManager>() != null)
         {
             Type = DragTargetTypes.Card;
-            TargetedCard = GetComponentInParent<CardManager>();
+            TargetedCard = GetComponent<CardManager>();
         }
         else
         {

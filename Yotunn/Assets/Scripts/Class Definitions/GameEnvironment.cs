@@ -85,7 +85,7 @@ namespace Cards
             else if (first == Player2) { return Player1; }
             else
             {
-                throw new System.Exception("Player calling GetEnemy() is not in the game");
+                throw new System.Exception("Player calling GetOtherPlayer() is not in the game");
             }
         }
 
