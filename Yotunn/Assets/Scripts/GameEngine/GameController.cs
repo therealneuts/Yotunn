@@ -5,11 +5,9 @@ using Cards;
 using DG.Tweening;
 using System.Threading; //implimentation de threading
 using UnityEngine.UI;
+using TMPro;
 
 public class GameController : MonoBehaviour {
-
-    //Référence pour le text qui dit à qui est le tour
-    [Header("Mettre la référence du texte message ici")]
     public GameObject CadreJoueur1;
     public GameObject CadreJoueur2;
 
@@ -27,10 +25,11 @@ public class GameController : MonoBehaviour {
         set
         {
             //Cadre l'icone joueur
-
             m_CurrentPlayer = value;
             //Shuffle les deck
 
+            //Demande à l'instance de l'objet Message d'afficher le message du player avec un wait time donné
+            Message.Instance.ShowMessage("Tour a " + m_CurrentPlayer.m_Name, 2f);
             //Appelle toute les UpKeep des cartes du current Player
             Upkeep();
         }
@@ -57,8 +56,7 @@ public class GameController : MonoBehaviour {
     //}
 
     }
-
-
+    
 
     public void Upkeep()
     {
@@ -104,3 +102,5 @@ public class GameController : MonoBehaviour {
         instance = this;
     }
 }
+
+
