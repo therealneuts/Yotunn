@@ -6,11 +6,14 @@ using Cards;
 public class Player : MonoBehaviour {
 
 
+
     public string m_Name { get; set; }
     List<CardManager> m_Hand { get; set; }
 
     CardManager _avatar;
+    DeckBehavior _PlayerDeck;
 
+    
     public CardManager Avatar
     {
         get
@@ -24,12 +27,8 @@ public class Player : MonoBehaviour {
         }
     }
 
-    private Deck _deck;
-
-    public Deck Deck
-    {
-        get { return _deck; }
-    }
+   
+    
 
     public Player Enemy { get { return Battlefield.Players.GetOtherPlayer(this); } }
 
@@ -38,9 +37,14 @@ public class Player : MonoBehaviour {
 
     public event CardPlayedHandler CardPlayed;
 
-
-    public void Draw(int Pige)
+    void Awake()
     {
+        _PlayerDeck = GetComponentInChildren<DeckBehavior>();
+    }
+
+    public void Draw(int Num)
+    {
+        
 
     }
 

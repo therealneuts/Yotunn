@@ -15,7 +15,7 @@ public class GlobalSettings : MonoBehaviour {
     public Text player_tag2;
 
     [Header("Prefabs")]
-    public GameObject cardPrefab;
+    public CardManager cardPrefab;
 
     [Header("Timings")]
     public float cardTransitionTime = 0.5f;
