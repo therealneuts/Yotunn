@@ -74,7 +74,7 @@ public class GameController : MonoBehaviour {
         StartTurn = null;
         StartTurn += (Player p) => { Message.Instance.ShowTurnMessage(p); };
         DeckBehavior deck = GetComponent<DeckBehavior>();
-       // deck.Draw();
+        //deck.Draw();
         //CurrentPlayer pige X Cartes
     }
 

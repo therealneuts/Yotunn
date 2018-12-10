@@ -261,6 +261,7 @@ public class CardManager : MonoBehaviour {
             DragTarget drtrg = GetComponent<DragTarget>();
             drtrg.enabled = false;
             transform.SetParent(gy.transform);
+            
 
         }
         

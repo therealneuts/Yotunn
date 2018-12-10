@@ -16,12 +16,19 @@ public class GraveyardBehavior : MonoBehaviour {
     public void AddCardToGraveyard(CardManager card)
     {
         
-            CardsinGraveyard.Add(card);
+        CardsinGraveyard.Add(card);
 
+        StartCoroutine(ADDinGraveYard(card));
 
-        card.transform.DOMove(this.transform.position, 1);
-        card.transform.DORotate(Vector3.zero, 0.5f);
        
+    }
+
+    IEnumerator ADDinGraveYard(CardManager card)
+    {
+        Tween twMove = card.transform.DOMove(this.transform.position, 1);
+        yield return twMove.WaitForCompletion();
+        card.transform.DORotate(Vector3.zero, 0.5f);
+
     }
 
     public void ShuffleinDeck()
