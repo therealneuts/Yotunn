@@ -58,6 +58,7 @@ public class CartePreview : MonoBehaviour {
         //Prévient le fonctionnement du script lorsque le joueur tient le bouton gauche de la souris. Ceci prévient un bug qui se produit lorsque
         //Le joueur bouge sa souris trop rapidement en déplaçant une carte.
         if (Input.GetMouseButton(0)) { return; }
+        if (DOTween.IsTweening(transform)) { return; }
         //Donner un SortingOrder gigantesque à la carte assure qu'elle sera visible, même si d'autres objets sont plus près de la caméra.
         System.Array.ForEach(cardCanvas, c => c.sortingOrder = 255);
         StartCoroutine(BeginPreview());
@@ -67,8 +68,12 @@ public class CartePreview : MonoBehaviour {
     //Il vient aussi de la classe de base
     private void OnMouseExit()
     {
-        if (Input.GetMouseButton(0)) { return; }
         System.Array.ForEach(cardCanvas, c => c.sortingOrder = 0);
+
+        if (Input.GetMouseButton(0)) { return; }
+
+        print("reached OnMouseExit");
+
         StartCoroutine(EndPreview());
     }
 
@@ -76,12 +81,12 @@ public class CartePreview : MonoBehaviour {
     {
         StartCoroutine(EndPreview());
         initRotation = transform.rotation;
-        CarteRectTransform.DORotate(Vector3.zero, duration);
+        CarteRectTransform.DOLocalRotate(Vector3.zero, duration);
     }
 
     private void OnMouseUp()
     {
-        CarteRectTransform.DORotate(initRotation.eulerAngles, duration);
+ 
     }
 
     IEnumerator BeginPreview()
@@ -112,8 +117,6 @@ public class CartePreview : MonoBehaviour {
 
     IEnumerator EndPreview()
     {
-        CarteRectTransform.DOScale(v3CarteInitialScale, duration);
-        CarteRectTransform.DORotate(initRotation.eulerAngles, duration);
         List<Tween> activeTweens = DOTween.TweensByTarget(transform, false);
         while (activeTweens != null)
         {
@@ -123,6 +126,8 @@ public class CartePreview : MonoBehaviour {
             activeTweens = DOTween.TweensByTarget(transform, false);
         }
         CarteRectTransform.DOLocalMoveY(transform.localPosition.y, duration);
+        CarteRectTransform.DOScale(v3CarteInitialScale, duration);
+        CarteRectTransform.DOLocalRotate(Vector3.zero, duration);
     }
 }
 //Yan, Alex C

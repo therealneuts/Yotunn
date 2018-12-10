@@ -48,7 +48,23 @@ public class HandLayout : MonoBehaviour {
             }
         }
 
+        if (card.GetComponent<DragTarget>() != null)
+        {
+            card.GetComponent<DragTarget>().enabled = false;
+        }
+        if (card.GetComponent<Draggable>() == null)
+        {
+            card.gameObject.AddComponent<Draggable>();
+        }
+        else
+        {
+            card.GetComponent<Draggable>().enabled = true;
+        }
+
+        ArrangeCards();
+
         card.DOMove(card.transform.parent.position, 1f);
+        card.DORotate(Vector3.zero, GlobalSettings.instance.cardTransitionTime);
     }
 
     private void HandIsFull()
@@ -58,6 +74,8 @@ public class HandLayout : MonoBehaviour {
 
     private void ArrangeCards()
     {
+        trimmedSlots.Clear();
+
         //Les lots vides de cartes ne sont pas considérés.
         foreach (Transform slot in slots)
         {

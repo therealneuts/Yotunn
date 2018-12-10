@@ -44,12 +44,11 @@ public class DragTarget : MonoBehaviour {
     {
         get
         {
+            if (_owner == null)
+            {
+                _owner = GetComponentInParent<Player>();
+            }
             return _owner;
-        }
-
-        set
-        {
-            _owner = value;
         }
     }
 
@@ -63,7 +62,6 @@ public class DragTarget : MonoBehaviour {
         else
         {
             Type = DragTargetTypes.Battleground;
-            Owner = GetComponentInParent<Player>();
         }
 
 	}

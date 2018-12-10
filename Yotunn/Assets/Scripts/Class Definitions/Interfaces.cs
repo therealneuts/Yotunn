@@ -52,7 +52,7 @@ namespace Cards
 
     public interface IAttacker
     {
-        void Attack();
+        void Attack(CardManager target);
     }
 
     public interface IPlayable

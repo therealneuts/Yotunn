@@ -23,6 +23,7 @@ public class SkillDraggingBehavior : DraggingAction {
     //Soit dans la main du joueur ou à l'endroit ou la carte était dans le jeu
     public override void OnStartDrag()
     {
+
         //Les cibles légales de la carte qu'on tire.
         TargetingOptions = cardBeingDragged.cardAsset.Targets;
 
@@ -55,11 +56,14 @@ public class SkillDraggingBehavior : DraggingAction {
             CardManager targetCard = target.GetComponent<CardManager>();
             cardBeingDragged.Play(targetCard);
         }
-        else { print("Dragged to an illegal target!"); }
-        //DOMove change la position en fesant une transition à l'objet dans le jeu vers la position donnée au premier paramètre
-        //à une vitesse donnée comme deuxième paramètre
-        //.SetEase est une méthode qui est appelé pour dire comment la transition se fera
-        transform.DOMove(v3PositionInitiale, duration);/*.SetEase(Ease.OutBounce, .5f, .1f); // <-- http://www.easings.net*/
+        else
+        {
+            print("Dragged to an illegal target!");
+            //DOMove change la position en fesant une transition à l'objet dans le jeu vers la position donnée au premier paramètre
+            //à une vitesse donnée comme deuxième paramètre
+            //.SetEase est une méthode qui est appelé pour dire comment la transition se fera
+            transform.DOMove(v3PositionInitiale, duration);/*.SetEase(Ease.OutBounce, .5f, .1f); // <-- http://www.easings.net*/
+        }
     }
 
     public override void OnDraggingInUpdate()
@@ -95,6 +99,7 @@ public class SkillDraggingBehavior : DraggingAction {
                 if (hit.collider.GetComponent<DragTarget>() != null)
                 {
                     target = hit.collider.GetComponent<DragTarget>();
+
 
                     if (target.Type == DragTargetTypes.Card && targetablePlayer == null) { return true; }
                     if (target.Type == DragTargetTypes.Card && target.TargetedCard.Owner == targetablePlayer) { return true; }

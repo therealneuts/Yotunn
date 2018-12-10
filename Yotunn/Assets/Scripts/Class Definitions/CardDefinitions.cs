@@ -24,10 +24,25 @@ namespace Cards
         public virtual void Play(CardManager target = null) { }
     }
 
-    public class Creature : Entity, IPlayable, IAttacker
+    public class Creature : Entity, IPlayable, IAttacker, IDamaging
     {
-        public virtual void Attack() { }
-        public virtual void Play(CardManager target = null) { }
+        public int Power
+        {
+            get
+            {
+                return cardManager.Power;
+            }
+        }
+
+        public virtual void Attack(CardManager target)
+        {
+            target.Health -= Power;
+        }
+        public virtual void Play(CardManager target = null)
+        {
+            print(name + " played");
+            cardManager.Owner.PlayerField.PlaceCardOnBattleground(cardManager);
+        }
     }
 
     public class Avatar : Entity

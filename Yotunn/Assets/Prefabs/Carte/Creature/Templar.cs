@@ -7,12 +7,6 @@ using System;
 [Serializable]
 public class Templar : Creature, IDamaging
     {
-    public int Power
-    {
-        get
-        {
-            return cardManager.Power;
-        }
-    }
+
 
 }

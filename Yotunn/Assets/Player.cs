@@ -12,6 +12,7 @@ public class Player : MonoBehaviour {
 
     CardManager _avatar;
     DeckBehavior _PlayerDeck;
+    BattlegroundLayout _playerField = null;
 
     
     public CardManager Avatar
@@ -27,11 +28,20 @@ public class Player : MonoBehaviour {
         }
     }
 
-   
-    
+
+    public BattlegroundLayout PlayerField
+    {
+        get
+        {
+            if (_playerField == null)
+            {
+                _playerField = GetComponentInChildren<BattlegroundLayout>();
+            }
+            return _playerField;
+        }
+    }
 
     public Player Enemy { get { return Battlefield.Players.GetOtherPlayer(this); } }
-
 
     public delegate void CardPlayedHandler(Player source, IPlayable carte);
 

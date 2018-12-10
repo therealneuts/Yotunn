@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using System;
 using Cards;
+using DG.Tweening;
 
 /// <summary>
 /// Le CardManager est un script attaché au sommet de la carte qui prend en charge la logique des actions produites sur la carte et par la carte.
@@ -35,6 +36,8 @@ public class CardManager : MonoBehaviour {
     public Image ImageGlowDerriere;
 
     Carte _cardScript;
+
+    internal Sequence tweeningQueue;
 
     public Carte CardScript
     {
@@ -222,15 +225,23 @@ public class CardManager : MonoBehaviour {
         CardScript = (Carte)gameObject.AddComponent(cardType);
 
         //Maintenant que nous avons une référence au script, nous pouvons déterminer le type de la carte. Ceci nous permet d'ignorer les valeurs non-nécessaires.
-        if (CardScript is Entity)
+        if (CardScript is Creature)
         {
             Health = cardAsset.MaxHealth;
             Power = cardAsset.Power;
+            gameObject.AddComponent<CreatureDraggingBehavior>();
         }
         else if (CardScript is Skill)
         {
             Power = cardAsset.Power;
+            gameObject.AddComponent<SkillDraggingBehavior>();
         }
+        
+        else if (CardScript is Boost)
+        {
+            //
+        }
+
         // -Alex C.
     }
 
@@ -261,6 +272,13 @@ public class CardManager : MonoBehaviour {
         {
             (CardScript as IPlayable).Play(target);
         }
+    }
+
+    public void ResetTweens()
+    {
+        transform.DOKill();
+        transform.DOMove(transform.parent.position, GlobalSettings.instance.cardTransitionTime);
+        transform.DORotate(Vector3.zero, GlobalSettings.instance.cardTransitionTime);
     }
 }
 

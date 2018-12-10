@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
+using System;
+using System.Linq;
 
 /// <summary>
 /// Fait l'arragement visuel des cartes sur la table de jeu. Contrairement à l'arrangement de la main, on leur donne ici un arragement horizontal.
@@ -18,7 +21,17 @@ public class BattlegroundLayout : MonoBehaviour {
     List<Transform> trimmedSlots = new List<Transform>();
 
     // Use this for initialization
-    void Start () {
+    void Start ()
+    {
+        //Transform.position est la position de l'objet parent des lots.
+        center = transform.position;
+        ArrangeCards();
+    }
+
+    private void ArrangeCards()
+    {
+        trimmedSlots.Clear();
+
         //Les lots vides de cartes ne sont pas considérés.
         foreach (Transform slot in slots)
         {
@@ -36,9 +49,6 @@ public class BattlegroundLayout : MonoBehaviour {
         BoxCollider cardCollider = trimmedSlots[0].GetComponentInChildren<BoxCollider>();
         minDistanceBetweenCards = cardCollider.size.x;
 
-        //Transform.position est la position de l'objet parent des lots.
-        center = transform.position;
-
         //coefficient multipliera distanceBetweenSegments pour obtenir la distance de la carte par rapport au centre.
         float coefficient;
         float distanceFromCenter;
@@ -53,10 +63,56 @@ public class BattlegroundLayout : MonoBehaviour {
         {
             coefficient = i - ((numCards - 1f) / 2f);
             distanceFromCenter = coefficient * distanceBetweenSegments;
-            print(distanceFromCenter + " " + distanceBetweenSegments);
             trimmedSlots[i].position = new Vector3(center.x + distanceFromCenter, center.y, center.z);
         }
+    }
 
-        //-Alex C
+    public void PlaceCardOnBattleground(CardManager card)
+    {
+        Transform targetSlot = null;
+        foreach (Transform slot in slots)
+        {
+            if (slot.GetComponentInChildren<CardManager>() == null)
+            {
+                targetSlot = slot;
+                break;
+            }
+        }
+
+        if (targetSlot == null)
+        {
+            throw new System.Exception("Battleground is full!");
+        }
+
+        card.transform.SetParent(targetSlot);
+
+        if (card.GetComponent<DragTarget>() == null)
+        {
+            card.gameObject.AddComponent<DragTarget>();
+        }
+        else
+        {
+            card.GetComponent<DragTarget>().enabled = true;
+        }
+
+        ArrangeCards();
+
+        StartCoroutine(MoveToBattleground(card));
+    }
+
+    private IEnumerator MoveToBattleground(CardManager card)
+    {
+        List<Tween> activeTweens = DOTween.TweensByTarget(card.transform, false);
+        while (activeTweens != null)
+        {
+            Tween longest = activeTweens.Where(t => t.Duration() == activeTweens.Max(tw => tw.Duration()))
+                                        .First();
+            yield return longest.WaitForCompletion();
+            activeTweens = DOTween.TweensByTarget(transform, false);
+        }
+
+        card.transform.DOMove(card.transform.parent.position, GlobalSettings.instance.cardTransitionTime);
+        card.transform.DORotate(Vector3.zero, GlobalSettings.instance.cardTransitionTime);
     }
 }
+//-Alex C
