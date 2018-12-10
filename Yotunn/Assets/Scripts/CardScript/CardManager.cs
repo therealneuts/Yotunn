@@ -263,8 +263,6 @@ public class CardManager : MonoBehaviour {
         {
             Draggable cardDraggable = GetComponent<Draggable>();
             cardDraggable.enabled = false;
-            DraggingAction drga = GetComponent<DraggingAction>();
-            cardDraggable.enabled = false;
             DragTarget drtrg = GetComponent<DragTarget>();
             drtrg.enabled = false;
             transform.SetParent(gy.transform);
