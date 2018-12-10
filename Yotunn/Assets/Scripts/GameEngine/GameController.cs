@@ -72,7 +72,7 @@ public class GameController : MonoBehaviour {
 
         StartTurn = null;
        DeckBehavior deck = GetComponent<DeckBehavior>();
-        deck.Draw();
+       // deck.Draw();
         //CurrentPlayer pige X Cartes
     }
 

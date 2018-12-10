@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DeckBehavior : MonoBehaviour {
 
-    [SerializeField]  List<CarteRessource> _MainDeck = new List<CarteRessource>();
+     List<CarteRessource> _MainDeck = new List<CarteRessource>();
     Stack<CardManager> _CardsInDeck = new Stack<CardManager>();
 
     public Stack<CardManager> CardsinDeck

@@ -251,7 +251,22 @@ public class CardManager : MonoBehaviour {
 
     public void Discard()
     {
-        //TODO implement discarding.
+        GraveyardBehavior gy = Owner.GetComponentInChildren<GraveyardBehavior>();
+        if (GetComponent<Draggable>() != null)
+        {
+            Draggable cardDraggable = GetComponent<Draggable>();
+            cardDraggable.enabled = false;
+            DraggingAction drga = GetComponent<DraggingAction>();
+            cardDraggable.enabled = false;
+            DragTarget drtrg = GetComponent<DragTarget>();
+            drtrg.enabled = false;
+            transform.SetParent(gy.transform);
+
+        }
+        
+        
+        gy.AddCardToGraveyard(this);
+      
 
     }
 

@@ -411,6 +411,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 65860521}
+  - component: {fileID: 65860522}
   m_Layer: 0
   m_Name: Graveyard
   m_TagString: Untagged
@@ -425,12 +426,23 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 65860520}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 11.56, y: -5.33, z: 0}
+  m_LocalPosition: {x: 11.56, y: 4.67, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 608670802}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &65860522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 65860520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99275bd5255964b4c97971d499b53924, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &75827471
 GameObject:
   m_ObjectHideFlags: 0
@@ -1342,9 +1354,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e18aa42a4a6d93948b505c767edf16a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _MainDeck:
-  - {fileID: 11400000, guid: 7ab61ade76a757743ac61afc7e7b002f, type: 2}
-  - {fileID: 11400000, guid: 7ab61ade76a757743ac61afc7e7b002f, type: 2}
 --- !u!1 &425162328
 GameObject:
   m_ObjectHideFlags: 0
@@ -2420,6 +2429,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 751676085}
+  - component: {fileID: 751676086}
   m_Layer: 0
   m_Name: Graveyard
   m_TagString: Untagged
@@ -2440,6 +2450,17 @@ Transform:
   m_Father: {fileID: 161510210}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &751676086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 751676084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99275bd5255964b4c97971d499b53924, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &771229375
 GameObject:
   m_ObjectHideFlags: 0
@@ -4714,10 +4735,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c786e6f645ce4e04bbec5ada8b29af3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-
-  CadreJoueur1: {fileID: 161510209}
-  CadreJoueur2: {fileID: 608670801}
-
+  CadreJoueur1: {fileID: 0}
+  CadreJoueur2: {fileID: 0}
 --- !u!4 &1642173921
 Transform:
   m_ObjectHideFlags: 0
@@ -4760,9 +4779,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e18aa42a4a6d93948b505c767edf16a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _MainDeck:
-  - {fileID: 11400000, guid: 5f566cc1b6ab53645a15c7602786e369, type: 2}
-  - {fileID: 11400000, guid: 5f566cc1b6ab53645a15c7602786e369, type: 2}
 --- !u!1 &1681870966
 GameObject:
   m_ObjectHideFlags: 0

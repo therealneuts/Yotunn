@@ -55,11 +55,16 @@ public class SkillDraggingBehavior : DraggingAction {
             CardManager targetCard = target.GetComponent<CardManager>();
             cardBeingDragged.Play(targetCard);
         }
-        else { print("Dragged to an illegal target!"); }
-        //DOMove change la position en fesant une transition à l'objet dans le jeu vers la position donnée au premier paramètre
-        //à une vitesse donnée comme deuxième paramètre
-        //.SetEase est une méthode qui est appelé pour dire comment la transition se fera
-        transform.DOMove(v3PositionInitiale, duration);/*.SetEase(Ease.OutBounce, .5f, .1f); // <-- http://www.easings.net*/
+        else {
+
+            print("Dragged to an illegal target!");
+            //DOMove change la position en fesant une transition à l'objet dans le jeu vers la position donnée au premier paramètre
+            //à une vitesse donnée comme deuxième paramètre
+            //.SetEase est une méthode qui est appelé pour dire comment la transition se fera
+            transform.DOMove(v3PositionInitiale, duration);/*.SetEase(Ease.OutBounce, .5f, .1f); // <-- http://www.easings.net*/
+
+        }
+        
     }
 
     public override void OnDraggingInUpdate()

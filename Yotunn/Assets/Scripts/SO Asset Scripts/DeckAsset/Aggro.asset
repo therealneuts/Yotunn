@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 899255b237e14424b8efe745d5cdba9e, type: 3}
+  m_Name: Aggro
+  m_EditorClassIdentifier: 
+  Cards:
+  - {fileID: 11400000, guid: c16ee564d2b8b1a41a256ab615342a90, type: 2}
+  - {fileID: 11400000, guid: c16ee564d2b8b1a41a256ab615342a90, type: 2}
+  - {fileID: 11400000, guid: c16ee564d2b8b1a41a256ab615342a90, type: 2}
+  - {fileID: 11400000, guid: c16ee564d2b8b1a41a256ab615342a90, type: 2}
+  - {fileID: 11400000, guid: c16ee564d2b8b1a41a256ab615342a90, type: 2}
+  - {fileID: 11400000, guid: 7ab61ade76a757743ac61afc7e7b002f, type: 2}
+  - {fileID: 11400000, guid: 7ab61ade76a757743ac61afc7e7b002f, type: 2}
+  - {fileID: 11400000, guid: 7ab61ade76a757743ac61afc7e7b002f, type: 2}
+  - {fileID: 11400000, guid: 5f566cc1b6ab53645a15c7602786e369, type: 2}
+  - {fileID: 11400000, guid: 5f566cc1b6ab53645a15c7602786e369, type: 2}
