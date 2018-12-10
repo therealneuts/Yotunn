@@ -29,7 +29,7 @@ public class GameController : MonoBehaviour {
             //Shuffle les deck
 
             //Demande à l'instance de l'objet Message d'afficher le message du player avec un wait time donné
-            Message.Instance.ShowMessage("Tour a " + m_CurrentPlayer.m_Name, 2f);
+           // Message.Instance.ShowMessage("Tour a " + m_CurrentPlayer.m_Name, 2f);
             //Appelle toute les UpKeep des cartes du current Player
             Upkeep();
         }
@@ -72,6 +72,8 @@ public class GameController : MonoBehaviour {
 
 
         StartTurn = null;
+       DeckBehavior deck = GetComponent<DeckBehavior>();
+        deck.Draw();
         //CurrentPlayer pige X Cartes
     }
 

@@ -1342,6 +1342,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e18aa42a4a6d93948b505c767edf16a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _MainDeck:
+  - {fileID: 11400000, guid: 7ab61ade76a757743ac61afc7e7b002f, type: 2}
+  - {fileID: 11400000, guid: 7ab61ade76a757743ac61afc7e7b002f, type: 2}
 --- !u!1 &425162328
 GameObject:
   m_ObjectHideFlags: 0
@@ -4711,8 +4714,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c786e6f645ce4e04bbec5ada8b29af3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CadreJoueur1: {fileID: 0}
-  CadreJoueur2: {fileID: 0}
+  CadreJoueur1: {fileID: 161510209}
+  CadreJoueur2: {fileID: 608670801}
 --- !u!4 &1642173921
 Transform:
   m_ObjectHideFlags: 0
@@ -4755,6 +4758,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e18aa42a4a6d93948b505c767edf16a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _MainDeck:
+  - {fileID: 11400000, guid: 5f566cc1b6ab53645a15c7602786e369, type: 2}
+  - {fileID: 11400000, guid: 5f566cc1b6ab53645a15c7602786e369, type: 2}
 --- !u!1 &1681870966
 GameObject:
   m_ObjectHideFlags: 0
