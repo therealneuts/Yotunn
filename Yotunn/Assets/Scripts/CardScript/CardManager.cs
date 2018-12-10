@@ -234,6 +234,13 @@ public class CardManager : MonoBehaviour {
         // -Alex C.
     }
 
+    //Take Damage est appelé lorsqu'il se fait attaqué
+    public void TakeDamage(int power)
+    {
+        //Change _Health avec son accesseur
+        this.Health -= power;
+    }
+
     //Méthode à appeler si on instancie une carte sans lui donner une identité pré-définie. La carte est instanciée en tant que carte vierge,
     //puis son identité (la CarteRessource) est assignée, puis elle signale à ses composantes qu'elle a terminé son initialisation.
     public void InitializeFromCardAsset(CarteRessource asset)

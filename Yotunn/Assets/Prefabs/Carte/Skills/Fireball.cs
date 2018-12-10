@@ -17,11 +17,10 @@ public class Fireball : Skill, IDamaging {
     }
 
     public override void Play(CardManager target)
-    {       
-
+    {
+        //Création d'une commande avec la target et le power en paramètre
         Command cm = new CommandSkills(target, Power);
-        base.Play();
-        
+        base.Play();        
     }
 
     
