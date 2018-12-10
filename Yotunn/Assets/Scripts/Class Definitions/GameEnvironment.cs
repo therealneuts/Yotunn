@@ -53,6 +53,13 @@ namespace Cards
             return result;
         }
 
+        public static List<CardManager> GetAllPlayableCard()
+        {
+            List<CardManager> result = new List<CardManager>();
+            //To do mettre toute les CardManager qui appartient au joueur Current
+            return result;
+        }
+
         //internal static List<CardManager> FindCards<T>(List<CardManager> location)
         //{
         //    List<CardManager> result = new List<CardManager>();

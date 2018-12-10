@@ -165,18 +165,20 @@ public class CardManager : MonoBehaviour {
     public bool CanPlay
     {
         get
-        {
+        {           
             return canPlay;
         }
 
         set
-        {            
+        {
             canPlay = value;
             if (CanPlayChanged != null)
             {
                 CanPlayChanged(value);
             }
-        }
+            //Si la bool change changer la gameObject associé a image Glow afin de dire au joueur qu'il puisse le jouer
+            ImageGlowDevant.gameObject.SetActive(canPlay);
+    }
     }
 
     public delegate void InitializedAction();
