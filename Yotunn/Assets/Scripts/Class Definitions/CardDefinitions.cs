@@ -52,7 +52,10 @@ namespace Cards
 
     public class Skill : Carte, IPlayable
     {
-        public virtual void Play(CardManager target = null) { }
+        public virtual void Play(CardManager target = null) {
+
+            cardManager.Discard();
+        }
     }
 
 }

@@ -20,7 +20,7 @@ public class CartePreview : MonoBehaviour {
     //le vecteur3 sera configuré par flCarteScaleMult
     Vector3 v3CarteScaleMult;
     //ici on applique le scale initiale dans l'éditeur
-    Vector3 v3CarteInitialScale;
+    public Vector3 v3CarteInitialScale;
     Quaternion initRotation;
 
     [Header("Besoin d'une carte ici")]
@@ -31,7 +31,7 @@ public class CartePreview : MonoBehaviour {
     public RectTransform CarteRectTransform;
 
     //Délegué d'évenement qui est appelé lorsque OnMouse est appelé
-    public delegate void DelegateOnMouseOverAction();
+    public delegate IEnumerator DelegateOnMouseOverAction();
     //Les différents événements, que si la carte a un hasPreview il son appelé 
     public event DelegateOnMouseOverAction OnMouseOverAction;
     public event DelegateOnMouseOverAction OnMouseLeaveACtion;
@@ -40,6 +40,7 @@ public class CartePreview : MonoBehaviour {
     [SerializeField] float duration = 0.5f;
 
     Canvas[] cardCanvas;
+    public static CartePreview CardInPreview;
 
     private void Start()
     {
@@ -62,7 +63,10 @@ public class CartePreview : MonoBehaviour {
         //Donner un SortingOrder gigantesque à la carte assure qu'elle sera visible, même si d'autres objets sont plus près de la caméra.
         System.Array.ForEach(cardCanvas, c => c.sortingOrder = 255);
         StartCoroutine(BeginPreview());
+
+
     }
+
 
     //Lorsque le curseur sort du collider cette méthode est appelé
     //Il vient aussi de la classe de base
@@ -87,6 +91,21 @@ public class CartePreview : MonoBehaviour {
     private void OnMouseUp()
     {
  
+    }
+
+    public void GUIhasBeenAttacked(int power)
+    {
+        StartCoroutine(AttackedCoroutine(power));
+    }
+
+    IEnumerator AttackedCoroutine(int power)
+    {
+        //Création d'une variable qui pointe vers un tweeen en fonction 
+        Tween shakingTween = CarteRectTransform.DOShakePosition(1f, 1f, 10, 90, false, false);
+        //Attend jusqu'a la fin du tweeening 
+        yield return shakingTween.WaitForCompletion();
+        //A la suite enlever la vie de la carte laquelle est à l'intérieur du gameManager
+        this.GetComponent<CardManager>().TakeDamage(power);
     }
 
     IEnumerator BeginPreview()

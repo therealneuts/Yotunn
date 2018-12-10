@@ -123,6 +123,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4326321327763138}
+  - component: {fileID: 114740444374796308}
   m_Layer: 0
   m_Name: TurnGUI
   m_TagString: Untagged
@@ -432,6 +433,19 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &114740444374796308
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1762204727145880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ce71640e81186e4bac571f5cb9e8c58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TextMessage: {fileID: 114796264364955462}
+  MessageCanvas: {fileID: 1933140476331404}
 --- !u!114 &114762298930455844
 MonoBehaviour:
   m_ObjectHideFlags: 1

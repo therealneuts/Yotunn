@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class DeckBehavior : MonoBehaviour {
 
-      List<CarteRessource> _MainDeck = new List<CarteRessource>();
-    Stack<CardManager> _CardsInDeck = new Stack<CardManager>();
+    public DeckAsset decklist;
+     List<CarteRessource> _MainDeck = new List<CarteRessource>();
+     Stack<CardManager> _CardsInDeck = new Stack<CardManager>();
+      
 
     public Stack<CardManager> CardsinDeck
     {
@@ -15,15 +17,23 @@ public class DeckBehavior : MonoBehaviour {
 
 
 
-
-    public void GenerateDeck()
+    
+    public void Start()
     {
+        
+       
+        _MainDeck.AddRange(decklist.Cards);
+        
         foreach(CarteRessource card in _MainDeck)
         {
-            CardManager newCard = (CardManager)Object.Instantiate(GlobalSettings.instance.cardPrefab);
+            
+            CardManager newCard = (CardManager)Object.Instantiate(GlobalSettings.instance.cardPrefab, position: (transform.position + new Vector3(0f, 0f, .5f)), rotation: Quaternion.Euler(0, 180, 0));          
             newCard.cardAsset = card;
             _CardsInDeck.Push(newCard);
+            
         }
+
+       
     }
 
 
