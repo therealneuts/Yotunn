@@ -1354,6 +1354,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e18aa42a4a6d93948b505c767edf16a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  decklist: {fileID: 11400000, guid: 5d3cad9a088f98c43bffc9f5a7476a04, type: 2}
 --- !u!1 &425162328
 GameObject:
   m_ObjectHideFlags: 0
@@ -2541,7 +2542,8 @@ MonoBehaviour:
   player2: {fileID: 608670804}
   player_tag1: {fileID: 1446067811}
   player_tag2: {fileID: 557568218}
-  cardPrefab: {fileID: 0}
+  cardPrefab: {fileID: 114241344295201838, guid: 5d4ce9897a676e1478d1f5160a44b8fc,
+    type: 2}
   cardTransitionTime: 0.5
   cardPreviewTime: 1
 --- !u!1001 &805131479
@@ -4755,6 +4757,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e18aa42a4a6d93948b505c767edf16a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  decklist: {fileID: 11400000, guid: 4227922b32213e14faba53673948cab6, type: 2}
 --- !u!1 &1681870966
 GameObject:
   m_ObjectHideFlags: 0
