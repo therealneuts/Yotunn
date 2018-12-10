@@ -4746,8 +4746,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c786e6f645ce4e04bbec5ada8b29af3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CadreJoueur1: {fileID: 0}
-  CadreJoueur2: {fileID: 0}
+  CadreJoueur1: {fileID: 161510213}
+  CadreJoueur2: {fileID: 608670804}
 --- !u!4 &1642173921
 Transform:
   m_ObjectHideFlags: 0

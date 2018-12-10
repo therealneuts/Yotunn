@@ -8,8 +8,8 @@ using UnityEngine.UI;
 using TMPro;
 
 public class GameController : MonoBehaviour {
-    public GameObject CadreJoueur1;
-    public GameObject CadreJoueur2;
+    public Player CadreJoueur1;
+    public Player CadreJoueur2;
 
     Duel Joueurs;
 
