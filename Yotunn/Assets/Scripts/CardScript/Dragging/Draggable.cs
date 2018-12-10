@@ -13,7 +13,7 @@ public class Draggable : MonoBehaviour {
     
 
     // Référence vers un script de type DraggingAction
-    private DraggingAction anDraggable;
+    public DraggingAction anDraggable;
 
     // Nous informe si nous sommes entrain de bouger cet objet
     private bool boDragging = false;
