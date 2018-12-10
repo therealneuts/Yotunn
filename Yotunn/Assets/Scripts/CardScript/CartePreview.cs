@@ -88,6 +88,17 @@ public class CartePreview : MonoBehaviour {
         CarteRectTransform.DORotate(initRotation.eulerAngles, duration);
     }
 
+    public void GUIhasBeenAttacked(int power)
+    {
+        StartCoroutine(AttackedCoroutine(power));
+    }
+
+    IEnumerator AttackedCoroutine(int power)
+    {
+        Tween shakingTween = CarteRectTransform.DOShakePosition(1f, 1f, 10, 90, false, false);
+        yield return shakingTween.WaitForCompletion();
+        this.GetComponent<CardManager>().Health -= power;
+    }
 
     IEnumerator BeginPreview()
     {

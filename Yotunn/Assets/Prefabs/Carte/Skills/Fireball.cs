@@ -17,10 +17,9 @@ public class Fireball : Skill, IDamaging {
     }
 
     public override void Play(CardManager target)
-    {
-        target.Health -= Power;
+    {       
 
-        Command cm = new CommandSkills(target);
+        Command cm = new CommandSkills(target, Power);
         base.Play();
         
     }
