@@ -95,9 +95,12 @@ public class CartePreview : MonoBehaviour {
 
     IEnumerator AttackedCoroutine(int power)
     {
+        //Création d'une variable qui pointe vers un tweeen en fonction 
         Tween shakingTween = CarteRectTransform.DOShakePosition(1f, 1f, 10, 90, false, false);
+        //Attend jusqu'a la fin du tweeening 
         yield return shakingTween.WaitForCompletion();
-        this.GetComponent<CardManager>().Health -= power;
+        //A la suite enlever la vie de la carte laquelle est à l'intérieur du gameManager
+        this.GetComponent<CardManager>().TakeDamage(power);
     }
 
     IEnumerator BeginPreview()

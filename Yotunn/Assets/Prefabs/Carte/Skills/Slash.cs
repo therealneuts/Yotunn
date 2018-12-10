@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Cards;
+using Assets.Scripts.CardScript;
 
 public class Slash : Skill, IDamaging {
     public int Power
@@ -14,6 +15,7 @@ public class Slash : Skill, IDamaging {
 
     public override void Play(CardManager target)
     {
-        target.Health -= Power;
+        Command cm = new CommandSkills(target, Power);
+        base.Play();
     }
 }
