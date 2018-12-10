@@ -12,11 +12,18 @@ public class CardHealth : MonoBehaviour {
     TextMeshProUGUI healthText = null;
 
 	// Use this for initialization
-	void Start () {
+	void Awake ()
+    {
         //Assignation des références.
         cardManager = GetComponentInParent<CardManager>();
         healthText = GetComponentInChildren<TextMeshProUGUI>();
 
+
+        cardManager.Initialized += OnCardInitialized;
+    }
+
+    private void OnCardInitialized()
+    {
         Carte type = cardManager.CardScript;
         if (type is Cards.Entity)
         {
@@ -32,10 +39,10 @@ public class CardHealth : MonoBehaviour {
         {
             gameObject.SetActive(false);
         }
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    }
+
+    // Update is called once per frame
+    void Update () {
 		
 	}
 

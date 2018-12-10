@@ -8,8 +8,8 @@ using UnityEngine.UI;
 using TMPro;
 
 public class GameController : MonoBehaviour {
-    public GameObject CadreJoueur1;
-    public GameObject CadreJoueur2;
+    public Player CadreJoueur1;
+    public Player CadreJoueur2;
 
     Duel Joueurs;
 
@@ -28,8 +28,7 @@ public class GameController : MonoBehaviour {
             m_CurrentPlayer = value;
             //Shuffle les deck
 
-            //Demande à l'instance de l'objet Message d'afficher le message du player avec un wait time donné
-           // Message.Instance.ShowMessage("Tour a " + m_CurrentPlayer.m_Name, 2f);
+
             //Appelle toute les UpKeep des cartes du current Player
             Upkeep();
         }

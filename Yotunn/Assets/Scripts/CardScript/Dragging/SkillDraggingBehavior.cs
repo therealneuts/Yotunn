@@ -49,8 +49,7 @@ public class SkillDraggingBehavior : DraggingAction {
     //Lorsque le joueur termine de tirer la carte, on détermine s'il choisi une cible légale.
     public override void OnEndDrag()
     {
-        bool targetIsLegal = DragSuccessful();
-        if (targetIsLegal)
+        if (DragSuccessful())
         {
             print("Dragged over a legal target!");
             CardManager targetCard = target.GetComponent<CardManager>();
@@ -96,6 +95,8 @@ public class SkillDraggingBehavior : DraggingAction {
                 if (hit.collider.GetComponent<DragTarget>() != null)
                 {
                     target = hit.collider.GetComponent<DragTarget>();
+
+                    if (target.Type == DragTargetTypes.Card && targetablePlayer == null) { return true; }
                     if (target.Type == DragTargetTypes.Card && target.TargetedCard.Owner == targetablePlayer) { return true; }
                 }
             }
