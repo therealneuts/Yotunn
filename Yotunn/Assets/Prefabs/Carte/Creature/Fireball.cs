@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Cards;
+using Assets.Scripts.CardScript;
 
 public class Fireball : Skill, IDamaging {
+
 
  
     public int Power
@@ -17,6 +19,10 @@ public class Fireball : Skill, IDamaging {
     public override void Play(CardManager target)
     {
         target.Health -= Power;
+
+        //Crée une commande afin d'afficher une animation pour les joueurs
+        Command cm = new CommandSkills(target);
     }
 
 }
+

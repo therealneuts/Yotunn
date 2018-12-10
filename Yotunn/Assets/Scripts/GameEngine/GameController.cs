@@ -11,6 +11,8 @@ public class GameController : MonoBehaviour {
     public GameObject CadreJoueur1;
     public GameObject CadreJoueur2;
 
+    public Message InstanceMessage;
+
     Duel Joueurs;
 
     private Player m_CurrentPlayer;
@@ -26,10 +28,8 @@ public class GameController : MonoBehaviour {
         {
             //Cadre l'icone joueur
             m_CurrentPlayer = value;
-            //Shuffle les deck
+            //Shuffle les deck          
 
-            //Demande à l'instance de l'objet Message d'afficher le message du player avec un wait time donné
-            Message.Instance.ShowMessage("Tour a " + m_CurrentPlayer.m_Name, 2f);
             //Appelle toute les UpKeep des cartes du current Player
             Upkeep();
         }
@@ -38,11 +38,11 @@ public class GameController : MonoBehaviour {
 
     public static GameController instance;
 
-    internal delegate void StartTurnAction(Player CurrentPlayer);
-    internal delegate void EndStepAction(Player CurrentPlayer);
+    public delegate void StartTurnAction(Player CurrentPlayer);
+    public delegate void EndStepAction(Player CurrentPlayer);
 
-    internal event StartTurnAction StartTurn;
-    internal event EndStepAction EndStep;
+    public event StartTurnAction StartTurn;
+    public event EndStepAction EndStep;
 
     public void OnGameStart()
     {
@@ -72,6 +72,7 @@ public class GameController : MonoBehaviour {
 
 
         StartTurn = null;
+        StartTurn += (Player p) => { Message.Instance.ShowTurnMessage(p); };
         //CurrentPlayer pige X Cartes
     }
 
@@ -91,6 +92,8 @@ public class GameController : MonoBehaviour {
         //Perdre cartes en mains
         //Change le Current player avec CurrentPlayer.GetEnemy
         CurrentPlayer = CurrentPlayer.Enemy;
+
+        
     }
     
 
@@ -100,6 +103,7 @@ public class GameController : MonoBehaviour {
         Battlefield.Players = Joueurs;
         CurrentPlayer = GlobalSettings.instance.player1;
         instance = this;
+        
     }
 }
 

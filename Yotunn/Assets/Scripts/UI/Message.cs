@@ -13,18 +13,22 @@ public class Message : MonoBehaviour {
     //Afin de créer un singleton pour ne pas en créer plus qu'un
     public static Message Instance;
 
-    private void Awake()
+
+    private void Start()
     {
         //La variable Instance qui pointe vers la seul instance du MessageManager
         Instance = this;
         //Désactivation de l'objet MessageCanvas dans le jeu
-        MessageCanvas.SetActive(false);
+        MessageCanvas.SetActive(false);        
     }
 
-    public void ShowMessage(string Message, float duration)
+    public void ShowTurnMessage(Player pPlayer)
     {
+        //Demande à l'instance de l'objet Message d'afficher le message du player avec un wait time donné 
+        string Message = "Tour a " + pPlayer.m_Name;
+
         //Commence un commande dans le background
-        StartCoroutine(ShowMessageCoroutine(Message, duration));
+        StartCoroutine(ShowMessageCoroutine(Message, 2f));
     }
 
     IEnumerator ShowMessageCoroutine(string Message, float duration)
@@ -42,3 +46,4 @@ public class Message : MonoBehaviour {
         
     }
 }
+//Yan

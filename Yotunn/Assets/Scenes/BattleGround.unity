@@ -3765,11 +3765,6 @@ Transform:
   m_Father: {fileID: 161510210}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1211375675 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1933140476331404, guid: 3a6cba3119fa8034cb5333f0c8025d35,
-    type: 2}
-  m_PrefabInternal: {fileID: 1929381115}
 --- !u!1001 &1231696077
 Prefab:
   m_ObjectHideFlags: 0
@@ -4646,12 +4641,6 @@ Canvas:
   m_SortingLayerID: -40607539
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!114 &1533739444 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 114796264364955462, guid: 3a6cba3119fa8034cb5333f0c8025d35,
-    type: 2}
-  m_PrefabInternal: {fileID: 1929381115}
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1 &1624470103
 GameObject:
   m_ObjectHideFlags: 0
@@ -4692,7 +4681,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1642173921}
   - component: {fileID: 1642173920}
-  - component: {fileID: 1642173922}
   m_Layer: 0
   m_Name: Game Controller
   m_TagString: Untagged
@@ -4713,6 +4701,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CadreJoueur1: {fileID: 0}
   CadreJoueur2: {fileID: 0}
+  InstanceMessage: {fileID: 1722705104}
 --- !u!4 &1642173921
 Transform:
   m_ObjectHideFlags: 0
@@ -4726,19 +4715,6 @@ Transform:
   m_Father: {fileID: 793473067}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1642173922
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1642173919}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ce71640e81186e4bac571f5cb9e8c58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TextMessage: {fileID: 1533739444}
-  MessageCanvas: {fileID: 1211375675}
 --- !u!1 &1675580248 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1996120067229906, guid: 2e238a2fc1a954e4a90711cf99ee3b6f,
@@ -4849,6 +4825,12 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 20, y: 5}
   m_EdgeRadius: 0
+--- !u!114 &1722705104 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114740444374796308, guid: 3a6cba3119fa8034cb5333f0c8025d35,
+    type: 2}
+  m_PrefabInternal: {fileID: 1929381115}
+  m_Script: {fileID: 11500000, guid: 0ce71640e81186e4bac571f5cb9e8c58, type: 3}
 --- !u!1 &1749362911
 GameObject:
   m_ObjectHideFlags: 0

@@ -20,7 +20,7 @@ public class CartePreview : MonoBehaviour {
     //le vecteur3 sera configuré par flCarteScaleMult
     Vector3 v3CarteScaleMult;
     //ici on applique le scale initiale dans l'éditeur
-    Vector3 v3CarteInitialScale;
+    public Vector3 v3CarteInitialScale;
     Quaternion initRotation;
 
     [Header("Besoin d'une carte ici")]
@@ -31,7 +31,7 @@ public class CartePreview : MonoBehaviour {
     public RectTransform CarteRectTransform;
 
     //Délegué d'évenement qui est appelé lorsque OnMouse est appelé
-    public delegate void DelegateOnMouseOverAction();
+    public delegate IEnumerator DelegateOnMouseOverAction();
     //Les différents événements, que si la carte a un hasPreview il son appelé 
     public event DelegateOnMouseOverAction OnMouseOverAction;
     public event DelegateOnMouseOverAction OnMouseLeaveACtion;
@@ -40,6 +40,7 @@ public class CartePreview : MonoBehaviour {
     [SerializeField] float duration = 0.5f;
 
     Canvas[] cardCanvas;
+    public static CartePreview CardInPreview;
 
     private void Start()
     {
@@ -61,7 +62,10 @@ public class CartePreview : MonoBehaviour {
         //Donner un SortingOrder gigantesque à la carte assure qu'elle sera visible, même si d'autres objets sont plus près de la caméra.
         System.Array.ForEach(cardCanvas, c => c.sortingOrder = 255);
         StartCoroutine(BeginPreview());
+
+
     }
+
 
     //Lorsque le curseur sort du collider cette méthode est appelé
     //Il vient aussi de la classe de base
@@ -83,6 +87,7 @@ public class CartePreview : MonoBehaviour {
     {
         CarteRectTransform.DORotate(initRotation.eulerAngles, duration);
     }
+
 
     IEnumerator BeginPreview()
     {
