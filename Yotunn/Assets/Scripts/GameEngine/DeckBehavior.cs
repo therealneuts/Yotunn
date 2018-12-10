@@ -27,8 +27,11 @@ public class DeckBehavior : MonoBehaviour {
         foreach(CarteRessource card in _MainDeck)
         {
             
-            CardManager newCard = (CardManager)Object.Instantiate(GlobalSettings.instance.cardPrefab, position: (transform.position + new Vector3(0f, 0f, .5f)), rotation: Quaternion.Euler(0, 180, 0));          
-            newCard.cardAsset = card;
+            CardManager newCard = Object.Instantiate(GlobalSettings.instance.cardPrefab, parent: transform, position: (transform.position + new Vector3(0f, 0f, .5f)), rotation: Quaternion.Euler(0, 180, 0));
+            newCard.InitializeFromCardAsset(card);
+
+            newCard.gameObject.SetActive(false);
+
             _CardsInDeck.Push(newCard);
             
         }

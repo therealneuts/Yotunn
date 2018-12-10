@@ -31,6 +31,10 @@ public class DragTarget : MonoBehaviour {
     {
         get
         {
+            if (_targetedCard == null)
+            {
+                _targetedCard = GetComponent<CardManager>();
+            }
             return _targetedCard;
         }
 

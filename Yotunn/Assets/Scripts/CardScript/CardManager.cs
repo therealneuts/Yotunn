@@ -52,11 +52,15 @@ public class CardManager : MonoBehaviour {
         }
     }
     //Références au propriétaire de la carte et à son avatar.
-    Player _owner;
+    public Player _owner;
     internal Player Owner
     {
         get
         {
+            if (_owner == null)
+            {
+                _owner = GetComponentInParent<Player>();
+            }
             return _owner;
         }
 

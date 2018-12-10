@@ -23,7 +23,6 @@ public class SkillDraggingBehavior : DraggingAction {
     //Soit dans la main du joueur ou à l'endroit ou la carte était dans le jeu
     public override void OnStartDrag()
     {
-
         //Les cibles légales de la carte qu'on tire.
         TargetingOptions = cardBeingDragged.cardAsset.Targets;
 

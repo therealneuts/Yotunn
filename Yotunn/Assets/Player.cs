@@ -8,7 +8,7 @@ public class Player : MonoBehaviour {
 
 
     public string m_Name { get; set; }
-    List<CardManager> m_Hand { get; set; }
+    HandLayout hand;
 
     CardManager _avatar;
     DeckBehavior _PlayerDeck;
@@ -49,13 +49,18 @@ public class Player : MonoBehaviour {
 
     void Awake()
     {
+        hand = GetComponentInChildren<HandLayout>();
         _PlayerDeck = GetComponentInChildren<DeckBehavior>();
     }
 
     public void Draw(int Num)
     {
-        
+        CardManager[] cards = _PlayerDeck.DrawMultiple(Num);
 
+        foreach (CardManager card in cards)
+        {
+            hand.AddCardToHand(card);
+        }
     }
 
     public void Play(IPlayable card)

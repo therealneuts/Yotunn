@@ -257,7 +257,6 @@ GameObject:
   - component: {fileID: 114890156938700862}
   - component: {fileID: 65666157573691350}
   - component: {fileID: 114994221888576334}
-  - component: {fileID: 114619560445266548}
   - component: {fileID: 114241344295201838}
   - component: {fileID: 114042630030836060}
   - component: {fileID: 114125338266043816}
@@ -534,6 +533,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasPreview: 1
   flCarteScaleMult: 2
+  v3CarteInitialScale: {x: 0, y: 0, z: 0}
   Carte: {fileID: 1410293490512752}
   CarteRectTransform: {fileID: 224428777407725036}
   yOffset: 1
@@ -777,13 +777,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cf376ca469eb8946a785a407b0fd79f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardAsset: {fileID: 11400000, guid: 7ab61ade76a757743ac61afc7e7b002f, type: 2}
+  cardAsset: {fileID: 0}
   CartePreview: {fileID: 0}
   ImageCarteGraphique: {fileID: 114265378101255828}
   ImageCorps: {fileID: 114770611895551612}
   ImageDevantFrame: {fileID: 114098406879732540}
   ImageGlowDevant: {fileID: 212232428493453542}
   ImageGlowDerriere: {fileID: 0}
+  _owner: {fileID: 0}
 --- !u!114 &114265378101255828
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1261,19 +1262,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114619560445266548
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1410293490512752}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fcb6705c0a478841a7c3c2ac928554b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cardBeingDragged: {fileID: 0}
-  duration: 0.2
 --- !u!114 &114657776755508244
 MonoBehaviour:
   m_ObjectHideFlags: 1

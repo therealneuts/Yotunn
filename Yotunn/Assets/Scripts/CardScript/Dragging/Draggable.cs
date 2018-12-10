@@ -13,7 +13,19 @@ public class Draggable : MonoBehaviour {
     
 
     // Référence vers un script de type DraggingAction
-    private DraggingAction anDraggable;
+    private DraggingAction draggingBehavior;
+
+    public DraggingAction DraggingBehavior
+    {
+        get
+        {
+            if (draggingBehavior == null)
+            {
+                draggingBehavior = GetComponent<DraggingAction>();
+            }
+            return draggingBehavior;
+        }
+    }
 
     // Nous informe si nous sommes entrain de bouger cet objet
     private bool boDragging = false;
@@ -32,9 +44,7 @@ public class Draggable : MonoBehaviour {
     // https://docs.unity3d.com/ScriptReference/MonoBehaviour.Awake.html
     private void Awake()
     {
-        // https://docs.unity3d.com/ScriptReference/GameObject.GetComponent.html
-        // GetComponent retourne un objet du type demandé à partir de la liste des objets qui composent un ensemble d'objet dans unity
-        anDraggable = GetComponent<DraggingAction>();
+
     }
 
     // Méthode de Monobehavior qui est appelé lorsque nous appuyons sur le boutton de la sourie par-dessus le gamObject
@@ -44,7 +54,7 @@ public class Draggable : MonoBehaviour {
         RaycastHit rch;
 
         // Si le CanDrag est vrai, cela voudrait dire que nous pouvons réaliser les actions de bouger le gameObject
-        if (anDraggable != null && anDraggable.CanDrag)
+        if (DraggingBehavior != null && draggingBehavior.CanDrag)
         {
             if (Physics.Raycast(ray, out rch))
             {
@@ -55,7 +65,7 @@ public class Draggable : MonoBehaviour {
             boDragging = true;
             
             // Call le début de bougemant d'objet
-            anDraggable.OnStartDrag();
+            draggingBehavior.OnStartDrag();
 
             // Camera.main indique la première camera du tag MainCamera dans le jeu 
             // cette indicateur nous aidera pour trouver la position exact du curseur dans le jeu
@@ -77,7 +87,7 @@ public class Draggable : MonoBehaviour {
             // Représente un point en 3 dimension qui sauvegarde les coordonnés de la sourie selon la vue de la camera
             Vector3 v3PositionSourie = Camera.main.ScreenToWorldPoint(CurseurPositionCamera);
             // Appelé pour performer à chaque frame 
-            anDraggable.OnDraggingInUpdate();
+            draggingBehavior.OnDraggingInUpdate();
             // transform est une propriété pour toute game object (voir haut)
             // nous updastons la position de l'objet selon un nouveau vecteur crée selon la position du curseur
             Vector3 newPos = v3PositionSourie + draggingOffset;
@@ -93,7 +103,7 @@ public class Draggable : MonoBehaviour {
         {
             boDragging = false;
             //Appelle la méthode de terminaison de bougemant de carte
-            anDraggable.OnEndDrag();
+            draggingBehavior.OnEndDrag();
         }
     }
 

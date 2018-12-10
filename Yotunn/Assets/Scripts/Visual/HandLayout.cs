@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using System.Linq;
 
 
 /// <summary>
@@ -28,10 +29,13 @@ public class HandLayout : MonoBehaviour {
 
     void Start ()
     {
-        ArrangeCards();
+        Player p = GetComponentInParent<Player>();
+
+        p.Draw(5);
+        ArrangeSlots();
     }
 
-    public void AddCardToHand(Transform card)
+    public void AddCardToHand(CardManager card)
     {
 
         if (trimmedSlots.Count == slots.Length)
@@ -44,7 +48,7 @@ public class HandLayout : MonoBehaviour {
         {
             if (slot.GetComponentInChildren<CardManager>() == null)
             {
-                card.SetParent(slot);
+                card.transform.SetParent(slot);
             }
         }
 
@@ -61,10 +65,27 @@ public class HandLayout : MonoBehaviour {
             card.GetComponent<Draggable>().enabled = true;
         }
 
-        ArrangeCards();
+        card.gameObject.SetActive(true);
 
-        card.DOMove(card.transform.parent.position, 1f);
-        card.DORotate(Vector3.zero, GlobalSettings.instance.cardTransitionTime);
+        ArrangeSlots();
+        StartCoroutine(MoveNewCard(card));
+    }
+
+    private IEnumerator MoveNewCard(CardManager card)
+    {
+        List<Tween> activeTweens = DOTween.TweensByTarget(transform, false);
+        while (activeTweens != null)
+        {
+            //Trouve le tween en train de manipuler l'objet qui a la plus longue durée, puis suspend jusqu'à ce que celui-ci soit fini.
+            Tween longest = activeTweens.Where(t => t.Duration() == activeTweens.Max(tw => tw.Duration()))
+                                        .First();
+            yield return longest.WaitForCompletion();
+            //Refait une recherche pour les objets qui sont en train de manipuler cet objet.
+            activeTweens = DOTween.TweensByTarget(transform, false);
+        }
+
+        card.transform.DOLocalMove(Vector3.zero, GlobalSettings.instance.cardTransitionTime);
+        card.transform.DOLocalRotate(Vector3.zero, GlobalSettings.instance.cardTransitionTime);
     }
 
     private void HandIsFull()
@@ -72,7 +93,7 @@ public class HandLayout : MonoBehaviour {
         //TODO implement
     }
 
-    private void ArrangeCards()
+    private void ArrangeSlots()
     {
         trimmedSlots.Clear();
 

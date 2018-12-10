@@ -76,7 +76,6 @@ public class CartePreview : MonoBehaviour {
 
         if (Input.GetMouseButton(0)) { return; }
 
-        print("reached OnMouseExit");
 
         StartCoroutine(EndPreview());
     }
@@ -84,7 +83,6 @@ public class CartePreview : MonoBehaviour {
     private void OnMouseDown()
     {
         StartCoroutine(EndPreview());
-        initRotation = transform.rotation;
         CarteRectTransform.DOLocalRotate(Vector3.zero, duration);
     }
 
@@ -113,8 +111,6 @@ public class CartePreview : MonoBehaviour {
         //y = 0 est la ligne du milieu du jeu. Si la carte est dans la partie supérieure du jeu (joueur 2), elle grossit vers le bas.
         //Si elle est dans la partie inférieure du jeu, elle grossit vers le haut.
         int direction = transform.position.y > 0 ? -1 : 1;
-
-        initRotation = transform.rotation;
 
         //Crée une liste des objets Tween qui sont présentement en train de manipuler cet objet. Tant que l'objet est en train d'être manipulé, la coroutine se suspend.
         List<Tween> activeTweens = DOTween.TweensByTarget(transform, false);

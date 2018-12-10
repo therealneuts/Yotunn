@@ -20,7 +20,7 @@ public abstract class DraggingAction : MonoBehaviour {
     {
         get
         {
-            return cardBeingDragged.Owner == GameController.instance.CurrentPlayer;
+            return (cardBeingDragged.Owner == GameController.instance.CurrentPlayer);
         }
     }
 
