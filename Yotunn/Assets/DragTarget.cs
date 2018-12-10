@@ -12,7 +12,7 @@ public class DragTarget : MonoBehaviour {
 
     DragTargetTypes _type;
     CardManager _targetedCard;
-    PlayerArea _targetedPlayerArea;
+    Player _owner;
 
     public DragTargetTypes Type
     {
@@ -40,16 +40,16 @@ public class DragTarget : MonoBehaviour {
         }
     }
 
-    public PlayerArea TargetedPlayerArea
+    public Player Owner
     {
         get
         {
-            return _targetedPlayerArea;
+            return _owner;
         }
 
         set
         {
-            _targetedPlayerArea = value;
+            _owner = value;
         }
     }
 
@@ -63,7 +63,7 @@ public class DragTarget : MonoBehaviour {
         else
         {
             Type = DragTargetTypes.Battleground;
-            TargetedPlayerArea = GetComponentInParent<PlayerArea>();
+            Owner = GetComponentInParent<Player>();
         }
 
 	}

@@ -82,7 +82,7 @@ public class CreatureDraggingBehavior : DraggingAction {
         {
             foreach(DragTarget target in targets)
             {
-                if (target.Type == DragTargetTypes.Battleground  && target.TargetedPlayerArea) { return true; }
+                if (target.Type == DragTargetTypes.Battleground  && target.Owner) { return true; }
             }
         }
         //Si aucune cible légale n'est sous le curseur, retourne faux.
