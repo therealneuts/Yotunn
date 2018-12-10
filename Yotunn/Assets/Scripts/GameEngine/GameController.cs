@@ -8,8 +8,8 @@ using UnityEngine.UI;
 using TMPro;
 
 public class GameController : MonoBehaviour {
-    public GameObject CadreJoueur1;
-    public GameObject CadreJoueur2;
+    public Player CadreJoueur1;
+    public Player CadreJoueur2;
 
     public Message InstanceMessage;
 
@@ -30,6 +30,10 @@ public class GameController : MonoBehaviour {
             m_CurrentPlayer = value;
             //Shuffle les deck          
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3ad082d6ee1bcd055c418d0799ca098ec155dc32
             //Appelle toute les UpKeep des cartes du current Player
             Upkeep();
         }
@@ -72,7 +76,12 @@ public class GameController : MonoBehaviour {
 
 
         StartTurn = null;
+<<<<<<< HEAD
         StartTurn += (Player p) => { Message.Instance.ShowTurnMessage(p); };
+=======
+       DeckBehavior deck = GetComponent<DeckBehavior>();
+       // deck.Draw();
+>>>>>>> 3ad082d6ee1bcd055c418d0799ca098ec155dc32
         //CurrentPlayer pige X Cartes
     }
 

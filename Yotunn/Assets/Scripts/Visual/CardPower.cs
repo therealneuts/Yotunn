@@ -14,12 +14,18 @@ public class CardPower : MonoBehaviour {
     Carte type;
 
     // Use this for initialization
-    void Start()
+    void Awake()
     {
-
         //Assignation des références.
         cardManager = GetComponentInParent<CardManager>();
         powerText = GetComponentInChildren<TextMeshProUGUI>();
+
+
+        cardManager.Initialized += OnCardInitialized;
+    }
+
+    private void OnCardInitialized()
+    {
         //avatar = cardManager.Avatar;
         type = cardManager.CardScript;
 

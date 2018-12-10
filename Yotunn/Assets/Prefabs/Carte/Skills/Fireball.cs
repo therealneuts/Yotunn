@@ -20,9 +20,12 @@ public class Fireball : Skill, IDamaging {
     {
         target.Health -= Power;
 
-        //Crée une commande afin d'afficher une animation pour les joueurs
         Command cm = new CommandSkills(target);
+        base.Play();
+        
     }
+
+    
 
 }
 

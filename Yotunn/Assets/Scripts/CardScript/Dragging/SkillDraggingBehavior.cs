@@ -49,18 +49,22 @@ public class SkillDraggingBehavior : DraggingAction {
     //Lorsque le joueur termine de tirer la carte, on détermine s'il choisi une cible légale.
     public override void OnEndDrag()
     {
-        bool targetIsLegal = DragSuccessful();
-        if (targetIsLegal)
+        if (DragSuccessful())
         {
             print("Dragged over a legal target!");
             CardManager targetCard = target.GetComponent<CardManager>();
             cardBeingDragged.Play(targetCard);
         }
-        else { print("Dragged to an illegal target!"); }
-        //DOMove change la position en fesant une transition à l'objet dans le jeu vers la position donnée au premier paramètre
-        //à une vitesse donnée comme deuxième paramètre
-        //.SetEase est une méthode qui est appelé pour dire comment la transition se fera
-        transform.DOMove(v3PositionInitiale, duration);/*.SetEase(Ease.OutBounce, .5f, .1f); // <-- http://www.easings.net*/
+        else {
+
+            print("Dragged to an illegal target!");
+            //DOMove change la position en fesant une transition à l'objet dans le jeu vers la position donnée au premier paramètre
+            //à une vitesse donnée comme deuxième paramètre
+            //.SetEase est une méthode qui est appelé pour dire comment la transition se fera
+            transform.DOMove(v3PositionInitiale, duration);/*.SetEase(Ease.OutBounce, .5f, .1f); // <-- http://www.easings.net*/
+
+        }
+        
     }
 
     public override void OnDraggingInUpdate()
@@ -96,6 +100,8 @@ public class SkillDraggingBehavior : DraggingAction {
                 if (hit.collider.GetComponent<DragTarget>() != null)
                 {
                     target = hit.collider.GetComponent<DragTarget>();
+
+                    if (target.Type == DragTargetTypes.Card && targetablePlayer == null) { return true; }
                     if (target.Type == DragTargetTypes.Card && target.TargetedCard.Owner == targetablePlayer) { return true; }
                 }
             }
