@@ -97,7 +97,7 @@ public class BattlegroundLayout : MonoBehaviour {
 
         ArrangeCards();
 
-        StartCoroutine(MoveToBattleground(card));
+        StartCoroutine(MoveToBattleground(card)); //exécute la coroutine MovetoBattleground avec la carte joué en paramètre, pour placer la carte joué dans la slot demandé
     }
 
     private IEnumerator MoveToBattleground(CardManager card)
