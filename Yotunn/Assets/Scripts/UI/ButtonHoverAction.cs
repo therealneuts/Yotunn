@@ -17,12 +17,12 @@ public class ButtonHoverAction : MonoBehaviour {
 
     private void OnMouseOver()
     {
-        //Active le gameObject afin que nous puissons voir le glow du button
+        //Active le gameObject afin que nous puissions voir le glow du button
         Hallow.SetActive(true);
     }
     private void OnMouseExit()
     {
-        //Désactive lorsque l'usager leave la case du collider afin d'avoir un bon user interaction
+        //Désactive lorsque l'usager quitte la case du collider afin d'avoir une bonne interaction avec l'usager
         Hallow.SetActive(false);
     }
 

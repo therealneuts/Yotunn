@@ -67,24 +67,24 @@ public class BattlegroundLayout : MonoBehaviour {
         }
     }
 
-    public void PlaceCardOnBattleground(CardManager card)
+    public void PlaceCardOnBattleground(CardManager card) //fonction qui gère le mouvement de la carte pour la placer sur l'aire de jeu
     {
-        Transform targetSlot = null;
+        Transform targetSlot = null; //La classe Transform contient les coordonées et les positions des éléments
         foreach (Transform slot in slots)
         {
-            if (slot.GetComponentInChildren<CardManager>() == null)
+            if (slot.GetComponentInChildren<CardManager>() == null) //Cherche une slot vide sur le player area
             {
                 targetSlot = slot;
                 break;
             }
         }
 
-        if (targetSlot == null)
+        if (targetSlot == null) //Si aucune slot n'est vide
         {
-            throw new System.Exception("Battleground is full!");
+            throw new System.Exception("Battleground is full!"); //Lance une exception qui gère la tentative je placé une nouvelle carte si il manque d'espace.
         }
 
-        card.transform.SetParent(targetSlot);
+        card.transform.SetParent(targetSlot); //assigne à la carte joué comme enfant de la slot sélectionné
 
         if (card.GetComponent<DragTarget>() == null)
         {
@@ -95,24 +95,24 @@ public class BattlegroundLayout : MonoBehaviour {
             card.GetComponent<DragTarget>().enabled = true;
         }
 
-        ArrangeCards();
+        ArrangeCards();//Arrange les cartes dans la zone de jeu
 
         StartCoroutine(MoveToBattleground(card)); //exécute la coroutine MovetoBattleground avec la carte joué en paramètre, pour placer la carte joué dans la slot demandé
     }
 
-    private IEnumerator MoveToBattleground(CardManager card)
+    private IEnumerator MoveToBattleground(CardManager card) //Gère le mouvement à l'aide d'animations Tween
     {
-        List<Tween> activeTweens = DOTween.TweensByTarget(card.transform, false);
-        while (activeTweens != null)
+        List<Tween> activeTweens = DOTween.TweensByTarget(card.transform, false); //Crée une liste de Tween représentait les tween actifs
+        while (activeTweens != null) //Tant que ActiveTween est vide
         {
-            Tween longest = activeTweens.Where(t => t.Duration() == activeTweens.Max(tw => tw.Duration()))
-                                        .First();
-            yield return longest.WaitForCompletion();
+            Tween longest = activeTweens.Where(t => t.Duration() == activeTweens.Max(tw => tw.Duration())) //Crée un tween a partir du tween ayant la plus longue durée.
+                                        .First(); //exécute cette tween en Premier
+            yield return longest.WaitForCompletion(); //Attend l'achèvement de la tween Longest 
             activeTweens = DOTween.TweensByTarget(transform, false);
         }
 
-        card.transform.DOMove(card.transform.parent.position, GlobalSettings.instance.cardTransitionTime);
-        card.transform.DORotate(Vector3.zero, GlobalSettings.instance.cardTransitionTime);
+        card.transform.DOMove(card.transform.parent.position, GlobalSettings.instance.cardTransitionTime); //Après l'animation Tween, replace la carte à la position de son parent
+        card.transform.DORotate(Vector3.zero, GlobalSettings.instance.cardTransitionTime); //Assigne à la carte une rotation standard, en utilisant le temps de transition défini dans l'instance singleton de GlobalSettings.
     }
 }
 //-Alex C

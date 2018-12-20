@@ -2,6 +2,11 @@
 using UnityEngine.UI;
 using System.Collections.Generic;
 
+
+/*
+ * Cette classe n'est pas utiliser dans le code, et à été implémenter dans le projet à partir de classe préfaite de Unity.
+ * Originaire de groupe de ressource Unity de base.
+ */ 
 public class BoxOutline : ModifiedShadow
 {
     const int maxHalfSampleCount = 20;
