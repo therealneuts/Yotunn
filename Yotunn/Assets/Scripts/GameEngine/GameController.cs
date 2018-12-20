@@ -65,8 +65,7 @@ public class GameController : MonoBehaviour {
 
         foreach (CardManager card in cards)
         {
-            if(card.Owner == CurrentPlayer)
-                StartTurn += (card as IHasStartTurnAction).OnStartTurn;
+            StartTurn += (card as IHasStartTurnAction).OnStartTurn;
         }
         if (StartTurn != null)
             StartTurn(CurrentPlayer);
@@ -77,7 +76,6 @@ public class GameController : MonoBehaviour {
         DeckBehavior deck = GetComponent<DeckBehavior>();
         //deck.Draw();
         //CurrentPlayer pige X Cartes
-
     }
 
     
