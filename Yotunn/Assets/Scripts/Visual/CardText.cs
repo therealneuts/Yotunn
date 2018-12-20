@@ -25,6 +25,6 @@ public class CardText : MonoBehaviour {
 
     private void OnCardInitialized()
     {
-        rulesText.text = cardManager.cardAsset.Description;
+        rulesText.text = cardManager.cardAsset.Description; //Assigne à la carte le texte emmagasiné dans le cardAsset à la description
     }
 }

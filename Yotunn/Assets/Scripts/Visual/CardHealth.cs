@@ -7,29 +7,29 @@ using TMPro;
 
 public class CardHealth : MonoBehaviour {
 
-    CardManager cardManager = null;
+    CardManager cardManager = null; //Crée une variable cardmanager null qui sera défini plus dans la fonction Awake
     int health;
-    TextMeshProUGUI healthText = null;
+    TextMeshProUGUI healthText = null; //Crée une variable Text null qui sera défini plus dans la fonction Awake
 
-	// Use this for initialization
-	void Awake ()
+    // Use this for initialization
+    void Awake ()
     {
         //Assignation des références.
         cardManager = GetComponentInParent<CardManager>();
         healthText = GetComponentInChildren<TextMeshProUGUI>();
 
 
-        cardManager.Initialized += OnCardInitialized;
+        cardManager.Initialized += OnCardInitialized; //Appel le délégué Initialized.
     }
 
-    private void OnCardInitialized()
+    private void OnCardInitialized() 
     {
-        Carte type = cardManager.CardScript;
-        if (type is Cards.Entity)
+        Carte type = cardManager.CardScript; //Trouve le type de la carte à partir du cardscript du Manager
+        if (type is Cards.Entity) //Si la carte est une entity
         {
 
             //Initialisation de la vie.
-            health = cardManager.Health;
+            health = cardManager.Health; 
             healthText.text = health.ToString();
 
             //Assignation de la méthode OnHealthChanged à l'événement HealthChanged du cardManager.
@@ -37,7 +37,7 @@ public class CardHealth : MonoBehaviour {
         }
         else
         {
-            gameObject.SetActive(false);
+            gameObject.SetActive(false); //Rend l'objet inactif
         }
     }
 

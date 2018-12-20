@@ -25,7 +25,7 @@ public class CreatureDraggingBehavior : DraggingAction {
 
     CardAreas cardLocation;
 
-    internal CardAreas CardLocation
+    internal CardAreas CardLocation //Assigme à la variable CardLocation une
     {
         get
         {
@@ -59,10 +59,10 @@ public class CreatureDraggingBehavior : DraggingAction {
     }
 
     //Lorsque le joueur termine de tirer la carte, on détermine s'il choisi une cible légale.
-    public override void OnEndDrag()
+    public override void OnEndDrag() 
     {
 
-        if (DragSuccessful())
+        if (DragSuccessful()) 
         {
             //Si la créature est dans la main, on la joue.
             if (CardLocation == CardAreas.Hand)

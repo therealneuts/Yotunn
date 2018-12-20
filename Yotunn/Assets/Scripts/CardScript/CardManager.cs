@@ -37,7 +37,7 @@ public class CardManager : MonoBehaviour {
 
     Carte _cardScript;
 
-    internal Sequence tweeningQueue;
+    internal Sequence tweeningQueue; //Crée une séquence pour géré la file de Tweening
 
     public Carte CardScript
     {
@@ -243,7 +243,7 @@ public class CardManager : MonoBehaviour {
             gameObject.AddComponent<SkillDraggingBehavior>();
         }
         
-        else if (CardScript is Boost)
+        else if (CardScript is Boost) //Le type Boost n'est pas encore implémenter
         {
             //
         }
@@ -273,40 +273,42 @@ public class CardManager : MonoBehaviour {
     }
 
 
-    public void Discard()
+    public void Discard() //Création de la méthode Discard, qui ajoutera les cartes à la liste de carte Graveyard et désignera aire de jeu ou les cartes jouées ou détruites se retrouve.
     {
-        GraveyardBehavior gy = Owner.GetComponentInChildren<GraveyardBehavior>();
+        GraveyardBehavior gy = Owner.GetComponentInChildren<GraveyardBehavior>(); //Trouve l'élément GraveyardBehavior
         if (GetComponent<Draggable>() != null)
         {
-            Draggable cardDraggable = GetComponent<Draggable>();
-            cardDraggable.enabled = false;
-            DragTarget drtrg = GetComponent<DragTarget>();
+            Draggable cardDraggable = GetComponent<Draggable>();//Trouve le component Draggable du cardmanager
+            cardDraggable.enabled = false; //Le désactive pour que la carte ne soit plus utilisable
+            DragTarget drtrg = GetComponent<DragTarget>(); //Fait de même pour la sélection de cible
             drtrg.enabled = false;
-            transform.SetParent(gy.transform);
+            transform.SetParent(gy.transform); //Rend la carte enfant du graveyard behavior
             
 
         }
         
         
-        gy.AddCardToGraveyard(this);
+        gy.AddCardToGraveyard(this); //Ajoute la carte au graveyard logique en appelant la méthode AddCardToGraveyard du GraveyardBehavior avec le cardmanager comme paramètre.
       
 
     }
+    //Alex St-Laurent
 
-    public void Play(CardManager target = null)
+    public void Play(CardManager target = null) //Méthode Play du carte manager, qui appelera la méthode play de la carte joué
     {
-        if (CardScript is IPlayable)
-        {   
-            if(Owner.hisManaReserve.NombreShardDispo >= this.ManaCost)
+        if (CardScript is IPlayable) //Vérifie que la carte peut être joué
+        {
+            if (Owner.hisManaReserve.NombreShardDispo >= this.ManaCost) //Vérifie que le joueur à le mana disponible pour jouer la carte.
             {
-                (CardScript as IPlayable).Play(target);
-                Owner.hisManaReserve.NombreShardDispo -= this.ManaCost;
+                (CardScript as IPlayable).Play(target); //Lance la méthode Play de la carte avec la cible en paramètre. La cible est sélectionné dans les méthode DragTarget.
+                Owner.hisManaReserve.NombreShardDispo -= this.ManaCost; //Soustrait le coût de la carte à la réserve de mana du joueur.
                 Console.Write(Owner.hisManaReserve.NombreShardDispo);
             }
+            else ResetTweens();
         }
     }
 
-    public void ResetTweens()
+    public void ResetTweens() //Méthode qui replace automatiquement la carte à sa position initiale.
     {
         transform.DOKill();
         transform.DOMove(transform.parent.position, GlobalSettings.instance.cardTransitionTime);

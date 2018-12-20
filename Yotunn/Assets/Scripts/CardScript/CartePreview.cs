@@ -70,7 +70,7 @@ public class CartePreview : MonoBehaviour {
 
     //Lorsque le curseur sort du collider cette méthode est appelé
     //Il vient aussi de la classe de base
-    private void OnMouseExit()
+    private void OnMouseExit() //lorsque la carte quite le cadre de la carte, arrête le preview
     {
         System.Array.ForEach(cardCanvas, c => c.sortingOrder = 0);
 
@@ -80,7 +80,7 @@ public class CartePreview : MonoBehaviour {
         StartCoroutine(EndPreview());
     }
 
-    private void OnMouseDown()
+    private void OnMouseDown() //Lorsque le joueur appuie sur la carte, termine le preview de la carte
     {
         StartCoroutine(EndPreview());
         CarteRectTransform.DOLocalRotate(Vector3.zero, duration);
@@ -91,7 +91,7 @@ public class CartePreview : MonoBehaviour {
  
     }
 
-    public void GUIhasBeenAttacked(int power)
+    public void GUIhasBeenAttacked(int power) //Lance la coroutine AttackedCoroutine avec le dégat reçu comme paramètre
     {
         StartCoroutine(AttackedCoroutine(power));
     }
@@ -130,7 +130,7 @@ public class CartePreview : MonoBehaviour {
         CarteRectTransform.DOLocalMoveY(transform.localPosition.y + direction * yOffset, duration);
     }
 
-    IEnumerator EndPreview()
+    IEnumerator EndPreview() //Événement qui termine un preview et gère les tweens
     {
         List<Tween> activeTweens = DOTween.TweensByTarget(transform, false);
         while (activeTweens != null)
