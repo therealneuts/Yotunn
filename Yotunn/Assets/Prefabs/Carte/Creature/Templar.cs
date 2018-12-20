@@ -12,7 +12,7 @@ public class Templar : Creature, IDamaging
 
     public override void Play(CardManager target)
     {
-        Command cm = new CommandSkills(target, Power);
+        
         base.Play();
     }
 
