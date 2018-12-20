@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Cards;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour {
 
@@ -14,7 +15,31 @@ public class Player : MonoBehaviour {
     DeckBehavior _PlayerDeck;
     BattlegroundLayout _playerField = null;
 
-    
+    public ReserveMana hisManaReserve;
+
+    protected int _MaxHealth = 20;
+    public Text HealthText;
+
+    public int MaxHealth
+    {
+        get
+        {
+            return _MaxHealth;
+        }
+
+        set
+        {
+            _MaxHealth = value;
+            HealthText.text = _MaxHealth.ToString();
+            if(_MaxHealth <= 0)
+            {
+                Message.Instance.ShowGameWinner(this.Enemy);
+            }
+        }
+
+    }
+
+
     public CardManager Avatar
     {
         get
@@ -51,6 +76,7 @@ public class Player : MonoBehaviour {
     {
         hand = GetComponentInChildren<HandLayout>();
         _PlayerDeck = GetComponentInChildren<DeckBehavior>();
+        HealthText.text = _MaxHealth.ToString();
     }
 
     public void Draw(int Num)

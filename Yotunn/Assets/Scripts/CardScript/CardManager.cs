@@ -296,8 +296,13 @@ public class CardManager : MonoBehaviour {
     public void Play(CardManager target = null)
     {
         if (CardScript is IPlayable)
-        {
-            (CardScript as IPlayable).Play(target);
+        {   
+            if(Owner.hisManaReserve.NombreShardDispo >= this.ManaCost)
+            {
+                (CardScript as IPlayable).Play(target);
+                Owner.hisManaReserve.NombreShardDispo -= this.ManaCost;
+                Console.Write(Owner.hisManaReserve.NombreShardDispo);
+            }
         }
     }
 

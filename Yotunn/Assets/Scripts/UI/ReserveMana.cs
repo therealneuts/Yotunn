@@ -125,11 +125,7 @@ public class ReserveMana : MonoBehaviour {
 
     private void FixedUpdate()
     {
-        //Pour les tests
-        if (Application.isEditor)
-        {
-            NombreShardDispo = inTestShard;
-        }
+
     }
 
     //cette méthode sera appellé au début du jeu et à chaque tour 

@@ -102,6 +102,16 @@ public class SkillDraggingBehavior : DraggingAction {
 
                     if (target.Type == DragTargetTypes.Card && targetablePlayer == null) { return true; }
                     if (target.Type == DragTargetTypes.Card && target.TargetedCard.Owner == targetablePlayer) { return true; }
+
+                    //IF attacked Player
+                    if (hit.collider.GetComponentInParent<Player>() != null)
+                    {
+                        Player pHited = hit.collider.GetComponentInParent<Player>();
+                        //Todo add player if not player current
+                        pHited.Enemy.MaxHealth -= cardBeingDragged.Power;
+
+                        return false;
+                    }
                 }
             }
         }

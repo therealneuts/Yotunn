@@ -97,7 +97,9 @@ public class GameController : MonoBehaviour {
         //Change le Current player avec CurrentPlayer.GetEnemy
         CurrentPlayer = CurrentPlayer.Enemy;
 
-        
+        CurrentPlayer.hisManaReserve.NombrePourTour = 10;
+
+        CurrentPlayer.hisManaReserve.NombreShardDispo = CurrentPlayer.hisManaReserve.NombrePourTour;
     }
     
 
@@ -107,7 +109,6 @@ public class GameController : MonoBehaviour {
         Battlefield.Players = Joueurs;
         CurrentPlayer = GlobalSettings.instance.player1;
         instance = this;
-        
     }
 }
 
