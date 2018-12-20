@@ -38,6 +38,8 @@ public class HandLayout : MonoBehaviour {
     public void AddCardToHand(CardManager card)
     {
 
+        Vector3 init = card.transform.position;
+
         if (trimmedSlots.Count == slots.Length)
         {
             HandIsFull();
@@ -68,6 +70,9 @@ public class HandLayout : MonoBehaviour {
         card.gameObject.SetActive(true);
 
         ArrangeSlots();
+
+        card.transform.position = init;
+
         StartCoroutine(MoveNewCard(card));
     }
 

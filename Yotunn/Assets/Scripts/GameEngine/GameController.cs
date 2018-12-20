@@ -75,7 +75,7 @@ public class GameController : MonoBehaviour {
         StartTurn = null;
         StartTurn += (Player p) => { Message.Instance.ShowTurnMessage(p); };
         DeckBehavior deck = GetComponent<DeckBehavior>();
-        //deck.Draw();
+        CurrentPlayer.Draw(1);
         //CurrentPlayer pige X Cartes
 
     }
@@ -105,7 +105,7 @@ public class GameController : MonoBehaviour {
 	void Awake () {
         Joueurs = new Duel(GlobalSettings.instance.player1, GlobalSettings.instance.player2);
         Battlefield.Players = Joueurs;
-        CurrentPlayer = GlobalSettings.instance.player1;
+        m_CurrentPlayer = GlobalSettings.instance.player1;
         instance = this;
         
     }
