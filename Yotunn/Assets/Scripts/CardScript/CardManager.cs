@@ -298,13 +298,13 @@ public class CardManager : MonoBehaviour {
     {
         if (CardScript is IPlayable) //Vérifie que la carte peut être joué
         {
-            if (Owner.hisManaReserve.NombreShardDispo >= this.ManaCost) //Vérifie que le joueur à le mana disponible pour jouer la carte.
-            {
+            //if (Owner.hisManaReserve.NombreShardDispo >= this.ManaCost) //Vérifie que le joueur à le mana disponible pour jouer la carte.
+            //{
                 (CardScript as IPlayable).Play(target); //Lance la méthode Play de la carte avec la cible en paramètre. La cible est sélectionné dans les méthode DragTarget.
-                Owner.hisManaReserve.NombreShardDispo -= this.ManaCost; //Soustrait le coût de la carte à la réserve de mana du joueur.
+                //Owner.hisManaReserve.NombreShardDispo -= this.ManaCost; //Soustrait le coût de la carte à la réserve de mana du joueur.
                 Console.Write(Owner.hisManaReserve.NombreShardDispo);
-            }
-            else ResetTweens();
+            //}
+            //else ResetTweens();
         }
     }
 

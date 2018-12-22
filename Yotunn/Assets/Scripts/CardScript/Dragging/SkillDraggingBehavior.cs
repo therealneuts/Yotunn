@@ -49,15 +49,23 @@ public class SkillDraggingBehavior : DraggingAction {
     //Lorsque le joueur termine de tirer la carte, on détermine s'il choisi une cible légale.
     public override void OnEndDrag()
     {
-        if (DragSuccessful())
+        if (cardBeingDragged.Owner.hisManaReserve.NombreShardDispo >= cardBeingDragged.ManaCost) //Vérifie que le joueur à le mana disponible pour jouer la carte.
         {
-            print("Dragged over a legal target!");
-            CardManager targetCard = target.GetComponent<CardManager>();
-            cardBeingDragged.Play(targetCard);
+            if (DragSuccessful())
+            {
+                print("Dragged over a legal target!");
+                CardManager targetCard = target.GetComponent<CardManager>();
+                cardBeingDragged.Owner.hisManaReserve.NombreShardDispo -= cardBeingDragged.ManaCost; //Soustrait le coût de la carte à la réserve de mana du joueur.
+                cardBeingDragged.Play(targetCard);
+            }
+            else
+            {
+                transform.DOMove(v3PositionInitiale, duration);/*.SetEase(Ease.OutBounce, .5f, .1f); // <-- http://www.easings.net*/
+            }
         }
         else
         {
-            print("Dragged to an illegal target!");
+            print("Pas assez de mnana!");
             //DOMove change la position en fesant une transition à l'objet dans le jeu vers la position donnée au premier paramètre
             //à une vitesse donnée comme deuxième paramètre
             //.SetEase est une méthode qui est appelé pour dire comment la transition se fera
@@ -93,8 +101,10 @@ public class SkillDraggingBehavior : DraggingAction {
         //Sinon, on vérifie si la carte ciblée est légale.
         else
         {
+            //Deux options nous est offert ici soit la carte qui a activé la carte ou le collider d'un objet sur le plan de jeu
             foreach (RaycastHit hit in hits)
             {
+                //Si celui qui a hit est une carte 
                 if (hit.collider.GetComponent<DragTarget>() != null)
                 {
                     target = hit.collider.GetComponent<DragTarget>();
@@ -102,16 +112,17 @@ public class SkillDraggingBehavior : DraggingAction {
 
                     if (target.Type == DragTargetTypes.Card && targetablePlayer == null) { return true; }
                     if (target.Type == DragTargetTypes.Card && target.TargetedCard.Owner == targetablePlayer) { return true; }
+                }
+                //Sinon c'est le deuxième choix c'est le portrait qui est attaché auparent qui contient un player lequel est la personne que nous vooulons attaquer
+                else if(hit.collider.GetComponentInParent<Player>() != null)
+                {
+                    Player pHited = hit.collider.GetComponentInParent<Player>();
+                    //Todo add player if not player current
+                    pHited.MaxHealth -= cardBeingDragged.Power;
 
-                    //IF attacked Player
-                    if (hit.collider.GetComponentInParent<Player>() != null)
-                    {
-                        Player pHited = hit.collider.GetComponentInParent<Player>();
-                        //Todo add player if not player current
-                        pHited.Enemy.MaxHealth -= cardBeingDragged.Power;
-
-                        return false;
-                    }
+                    cardBeingDragged.Owner.hisManaReserve.NombreShardDispo -= cardBeingDragged.ManaCost; //Soustrait le coût de la carte à la réserve de mana du joueur.
+                    cardBeingDragged.Discard();
+                    return false;
                 }
             }
         }

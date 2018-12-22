@@ -76,7 +76,14 @@ public class CreatureDraggingBehavior : DraggingAction {
                 
                 CardManager targetCM = target.GetComponent<CardManager>();
                 print(cardBeingDragged.CardScript + " attacks " + targetCM.CardScript);
-                creatureBeingDragged.Attack(targetCM);
+                //Créature sur la table qui attack coute du mana, check si la reserve du joueur est assez haute pour attacker
+                if(cardBeingDragged.Owner.hisManaReserve.NombreShardDispo >= cardBeingDragged.ManaCost)
+                {
+                    //Atack par la  méthode attack de la créature
+                    creatureBeingDragged.Attack(targetCM);
+                    //subtitue de la mana pooldu joueur le cout du mana
+                    cardBeingDragged.Owner.hisManaReserve.NombreShardDispo -= cardBeingDragged.ManaCost;
+                }
                 transform.DOMove(v3PositionInitiale, duration);
             }
         }
