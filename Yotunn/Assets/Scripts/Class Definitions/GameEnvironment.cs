@@ -86,22 +86,6 @@ namespace Cards
 
             return result;
         }
-
-        //internal static List<CardManager> FindCards<T>(List<CardManager> location)
-        //{
-        //    List<CardManager> result = new List<CardManager>();
-
-
-        //    foreach (Carte carte in location.lsCartes)
-        //    {
-        //        if (carte is T)
-        //        {
-        //            result += carte;
-        //        }
-        //    }
-
-        //    return result;
-        //}
     }
 
 

@@ -11,12 +11,4 @@ public class PlayerBehavior : MonoBehaviour {
     {
         CurPlayer = gc.CurrentPlayer;
     }
-
-
-
-    
-   
-
-
-   
 }

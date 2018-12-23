@@ -8,16 +8,10 @@ public abstract class TurnMaker : MonoBehaviour {
     internal Player p;
 
     void Awake()
-    {
-        
-           
+    {        
     }
 
     public virtual void OnUpkeep()
-    {
-       
+    {   
     }
-
-    
-	
 }

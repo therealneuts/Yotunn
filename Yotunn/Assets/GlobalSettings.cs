@@ -41,6 +41,4 @@ public class GlobalSettings : MonoBehaviour {
         players.Add(PlayerZones.Top, player2);
         instance = this;
 	}
-	
-    
 }

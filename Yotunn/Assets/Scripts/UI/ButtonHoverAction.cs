@@ -10,11 +10,6 @@ public class ButtonHoverAction : MonoBehaviour {
     //Référence vers le gameObject du jeu
     public GameObject Hallow;
 
-	// Use this for initialization
-	void Start () {        
-        
-	}
-
     private void OnMouseOver()
     {
         //Active le gameObject afin que nous puissions voir le glow du button

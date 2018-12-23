@@ -104,7 +104,8 @@ public class GameController : MonoBehaviour {
 
         foreach (CardManager card in cards)
         {
-            StartTurn += (card as IHasEndStepAction).OnEndStep;
+            if(card.Owner == CurrentPlayer)
+                StartTurn += (card as IHasEndStepAction).OnEndStep;
         }
 
         //Perdre cartes en mains
