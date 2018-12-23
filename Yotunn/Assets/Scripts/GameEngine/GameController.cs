@@ -41,8 +41,7 @@ public class GameController : MonoBehaviour {
         set
         {
             //Cadre l'icone joueur
-            m_CurrentPlayer = value;
-            //Shuffle les deck          
+            m_CurrentPlayer = value;       
 
             //Appelle toute les UpKeep des cartes du current Player
             Upkeep();
@@ -73,8 +72,8 @@ public class GameController : MonoBehaviour {
         //si c'est le current player ajouter la méthode d'OnStartTurn à l'événement StartTurn
         foreach (CardManager card in cards)
         {
-            if(card.Owner == CurrentPlayer)
-                StartTurn += (card as IHasStartTurnAction).OnStartTurn;
+
+            StartTurn += (card.CardScript as IHasStartTurnAction).OnStartTurn;
         }
 
         //assigner au début de tour une méthode qui affiche à partir de l'instance du système de message le joueur à qui est le tour
@@ -83,11 +82,11 @@ public class GameController : MonoBehaviour {
 
         //si n'est pas null faire jouer tout les méthodes mises dans le StartTurn.
         if (StartTurn != null)
+        {
             StartTurn(CurrentPlayer);
+            StartTurn = null;
+        }
 
-        //Nétoyer l'événement du début du tour 
-        StartTurn = null;
-        DeckBehavior deck = GetComponent<DeckBehavior>();
         //Fait piger une carte au joueur à qui est le tour par la propriété m_CurrentPlayer à partir d'une fonction réservé au objet du type Joueur
         CurrentPlayer.Draw(1);
         //CurrentPlayer pige X Cartes
@@ -100,12 +99,18 @@ public class GameController : MonoBehaviour {
     /// </summary>
     public void EndTurn()
     {
-        List<CardManager> cards = Battlefield.GetPermanentsWhere((Carte c) => { return (c is IHasEndStepAction); });
+        List<CardManager> cards = Battlefield.GetPermanentsWhere((Carte c) => (c is IHasEndStepAction));
 
         foreach (CardManager card in cards)
         {
             if(card.Owner == CurrentPlayer)
-                StartTurn += (card as IHasEndStepAction).OnEndStep;
+                EndStep += (card.CardScript as IHasEndStepAction).OnEndStep;
+        }
+
+        if (EndStep != null)
+        {
+            EndStep(CurrentPlayer);
+            EndStep = null;
         }
 
         //Perdre cartes en mains

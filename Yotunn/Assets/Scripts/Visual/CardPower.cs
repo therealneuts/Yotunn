@@ -64,7 +64,7 @@ public class CardPower : MonoBehaviour {
     //Fonction qui prendra en charge l'événement PowerChanged de la carte en affichant la nouvelle valeur.
     public void OnPowerChanged(CardManager card, int difference)
     {
-        power += difference;
+        power = cardManager.Power;
 
         powerText.text = power.ToString();
         if (power < initialPower) { powerText.color = Color.red; }

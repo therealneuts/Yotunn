@@ -4,7 +4,8 @@
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -13,14 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Cards:
   - {fileID: 11400000, guid: 7ab61ade76a757743ac61afc7e7b002f, type: 2}
+  - {fileID: 11400000, guid: 861c60ca2f6e85243b8bd949ef66799e, type: 2}
+  - {fileID: 11400000, guid: 861c60ca2f6e85243b8bd949ef66799e, type: 2}
   - {fileID: 11400000, guid: c16ee564d2b8b1a41a256ab615342a90, type: 2}
   - {fileID: 11400000, guid: 5f566cc1b6ab53645a15c7602786e369, type: 2}
   - {fileID: 11400000, guid: c16ee564d2b8b1a41a256ab615342a90, type: 2}
   - {fileID: 11400000, guid: 5f566cc1b6ab53645a15c7602786e369, type: 2}
-  - {fileID: 11400000, guid: c16ee564d2b8b1a41a256ab615342a90, type: 2}
-  - {fileID: 11400000, guid: 5f566cc1b6ab53645a15c7602786e369, type: 2}
-  - {fileID: 11400000, guid: 7ab61ade76a757743ac61afc7e7b002f, type: 2}
-  - {fileID: 11400000, guid: 7ab61ade76a757743ac61afc7e7b002f, type: 2}
+  - {fileID: 11400000, guid: 861c60ca2f6e85243b8bd949ef66799e, type: 2}
+  - {fileID: 11400000, guid: 861c60ca2f6e85243b8bd949ef66799e, type: 2}
   - {fileID: 11400000, guid: c16ee564d2b8b1a41a256ab615342a90, type: 2}
   - {fileID: 11400000, guid: 5f566cc1b6ab53645a15c7602786e369, type: 2}
   - {fileID: 11400000, guid: c16ee564d2b8b1a41a256ab615342a90, type: 2}

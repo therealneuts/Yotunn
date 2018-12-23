@@ -41,7 +41,6 @@ namespace Cards
         }
         public virtual void Play(CardManager target = null) //Fonction IPlayable requise par l'interface IPlayable
         {
-            print(name + " played"); //Indique que la carte à été jouer dans la console
             cardManager.Owner.PlayerField.PlaceCardOnBattleground(cardManager); //Appelle la méthode PlaceCardonBattleground avec la carte comme paramètre.
         }
     }

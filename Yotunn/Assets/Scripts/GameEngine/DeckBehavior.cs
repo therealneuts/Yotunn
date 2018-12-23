@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class DeckBehavior : MonoBehaviour {
 
@@ -36,7 +37,7 @@ public class DeckBehavior : MonoBehaviour {
             
         }
 
-       
+        ShuffleDeck();
     }
 
 
@@ -55,5 +56,20 @@ public class DeckBehavior : MonoBehaviour {
         }
 
         return drawnCards;
+    }
+
+    //Brasse le deck en générant une valeur aléatoire entre 0 et 1 pour chaque carte, puis ordonnant les cartes par cette valeur.
+    public void ShuffleDeck()
+    {
+        var query = CardsinDeck.OrderBy(c => Random.value);
+
+        Stack<CardManager> shuffledDeck = new Stack<CardManager>();
+
+        foreach(CardManager card in query)
+        {
+            shuffledDeck.Push(card);
+        }
+
+        CardsinDeck = shuffledDeck;
     }
 }

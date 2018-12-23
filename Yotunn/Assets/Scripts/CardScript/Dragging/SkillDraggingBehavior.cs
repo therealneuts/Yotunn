@@ -64,7 +64,6 @@ public class SkillDraggingBehavior : DraggingAction {
         }
         else
         {
-            print("Pas assez de mana!");
             //DOMove change la position en fesant une transition à l'objet dans le jeu vers la position donnée au premier paramètre
             //à une vitesse donnée comme deuxième paramètre
             //.SetEase est une méthode qui est appelé pour dire comment la transition se fera

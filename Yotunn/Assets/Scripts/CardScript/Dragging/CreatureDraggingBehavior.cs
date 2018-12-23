@@ -62,7 +62,6 @@ public class CreatureDraggingBehavior : DraggingAction {
             //Si la créature est dans la main, on la joue.
             if (CardLocation == CardAreas.Hand)
             {
-                print("Dragged card from hand to battleground");
                 cardBeingDragged.Play();
             }
             //Si la créature est sur la table, elle attacque la cible.
@@ -70,7 +69,6 @@ public class CreatureDraggingBehavior : DraggingAction {
             {
                 
                 CardManager targetCM = target.GetComponent<CardManager>();
-                print(cardBeingDragged.CardScript + " attacks " + targetCM.CardScript);
                 //Créature sur la table qui attack coute du mana, check si la reserve du joueur est assez haute pour attacker
                 if(cardBeingDragged.Owner.hisManaReserve.NombreShardDispo >= cardBeingDragged.ManaCost)
                 {
@@ -84,7 +82,6 @@ public class CreatureDraggingBehavior : DraggingAction {
         }
         else
         {
-            print("Dragged to an illegal target!");
             //DOMove change la position en fesant une transition à l'objet dans le jeu vers la position donnée au premier paramètre
             //à une vitesse donnée comme deuxième paramètre
             //.SetEase est une méthode qui est appelé pour dire comment la transition se fera
@@ -101,7 +98,6 @@ public class CreatureDraggingBehavior : DraggingAction {
     //La méthode qui détermine si l'utilisateur a placé son curseur sur une cible légale pour la carte.
     protected override bool DragSuccessful()
     {
-        print(CardLocation);
         //Si une créature est dans la main, la seule cible valide est le champ de son propriétaire
         if (CardLocation == CardAreas.Hand)
         {
