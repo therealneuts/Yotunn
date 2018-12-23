@@ -15,10 +15,10 @@ public class HandLayout : MonoBehaviour {
     public Transform[] slots;
 
     //Champs modifiables dans l'éditeur Unity qui affectent le positionnement des cartes.
-    [SerializeField] float totalArc = Mathf.PI / 2;
-    [SerializeField] float maxAngleBetweenCards = Mathf.PI / 16;
-    [SerializeField] float virtualCircleRadius = 5f;
-    [SerializeField] float zSpacing = 0.02f;
+    [SerializeField] float totalArc = Mathf.PI / 2;                         //Distance totale que les cartes peuvent couvrir, en radians.
+    [SerializeField] float maxAngleBetweenCards = Mathf.PI / 16;            //Désigne une distance maximale entre chaque carte, en radians
+    [SerializeField] float virtualCircleRadius = 5f;                        //Le rayon du cercle viruel autour duquel les cartes sont arrangées.
+    [SerializeField] float zSpacing = 0.02f;                                //Superpose les cartes.
 
     Vector3 middleCardPosition;
     Vector3 virtualCenter;
@@ -35,17 +35,24 @@ public class HandLayout : MonoBehaviour {
         ArrangeSlots();
     }
 
+    /// <summary>
+    /// Prend en charge le comportement de l'ajout d'une carte à la main d'un joueur.
+    /// </summary>
+    /// <param name="card">La carte à placer dans la main</param>
     public void AddCardToHand(CardManager card)
     {
-
+        //Puisque la carte sera déplacée lorsqu'elle sera assignée à un lot parent et que celui-ci sera réordonné, on enregistre sa position initiale
+        //afin de s'assurer que, visuellement, la carte sortira de la pile de carte.
         Vector3 init = card.transform.position;
 
+        //Si la main est pleine, retourne.
         if (trimmedSlots.Count == slots.Length)
         {
             HandIsFull();
             return;
         }
 
+        //Trouve un lot vide et assigne la carte à ce lot.
         foreach (Transform slot in slots)
         {
             if (slot.GetComponentInChildren<CardManager>() == null)
@@ -54,6 +61,7 @@ public class HandLayout : MonoBehaviour {
             }
         }
 
+        //Ajoute et retire les composantes qui doivent ou ne doivent pas être actives quand une carte est dans la main du joueur.
         if (card.GetComponent<DragTarget>() != null)
         {
             card.GetComponent<DragTarget>().enabled = false;
@@ -69,13 +77,17 @@ public class HandLayout : MonoBehaviour {
 
         card.gameObject.SetActive(true);
 
+        //Réordonne les lots. Puisque la carte est maintenant enfant d'un lot et suit ses mouvements et rotations, la carte sera déplacée.
         ArrangeSlots();
 
+        //la carte est replacée sur la pile de cartes.
         card.transform.position = init;
 
+        //Démarre l'effet visuel de la carte se déplaçant vers la main.
         StartCoroutine(MoveNewCard(card));
     }
 
+    //Attend que tous les déplacements soient finis avant d'en ajouter un.
     private IEnumerator MoveNewCard(CardManager card)
     {
         List<Tween> activeTweens = DOTween.TweensByTarget(transform, false);
@@ -95,7 +107,7 @@ public class HandLayout : MonoBehaviour {
 
     private void HandIsFull()
     {
-        //TODO implement
+        //TODO implement visual feedback
     }
 
     private void ArrangeSlots()
@@ -137,7 +149,7 @@ public class HandLayout : MonoBehaviour {
             float yOffset = Mathf.Sin(angle);
 
             //Assignation de la position et de la rotation de la carte sur le cercle virtuel. Le zSpacing est la position en profondeur de la carte.
-            //Puisque les cartes sont interposées lorsqu'il y en a une grande quantité, on doit les séparer en pronfondeur.
+            //Puisque les cartes sont superposées lorsqu'il y en a une grande quantité, on doit les séparer en pronfondeur.
             trimmedSlots[i].position = new Vector3(virtualCenter.x + virtualCircleRadius * xOffset, virtualCenter.y + virtualCircleRadius * yOffset, i * zSpacing);
 
             //Crée une rotation sur l'axe Z (profondeur) égale à l'angle de la carte sur le cercle. Cependant, puisqu'on veut que pi/2 (le haut du cercle) crée une rotation

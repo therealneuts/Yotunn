@@ -53,7 +53,6 @@ public class SkillDraggingBehavior : DraggingAction {
         {
             if (DragSuccessful())
             {
-                print("Dragged over a legal target!");
                 CardManager targetCard = target.GetComponent<CardManager>();
                 cardBeingDragged.Owner.hisManaReserve.NombreShardDispo -= cardBeingDragged.ManaCost; //Soustrait le coût de la carte à la réserve de mana du joueur.
                 cardBeingDragged.Play(targetCard);
@@ -65,7 +64,7 @@ public class SkillDraggingBehavior : DraggingAction {
         }
         else
         {
-            print("Pas assez de mnana!");
+            print("Pas assez de mana!");
             //DOMove change la position en fesant une transition à l'objet dans le jeu vers la position donnée au premier paramètre
             //à une vitesse donnée comme deuxième paramètre
             //.SetEase est une méthode qui est appelé pour dire comment la transition se fera

@@ -17,6 +17,15 @@ public class Player : MonoBehaviour {
 
     public ReserveMana hisManaReserve;
 
+    public int AvailableMana
+    {
+        get
+        {
+            return hisManaReserve.NombrePourTour;
+        }
+    }
+
+
     protected int _MaxHealth = 20;
     public Text HealthText;
 
@@ -68,6 +77,8 @@ public class Player : MonoBehaviour {
 
     public Player Enemy { get { return Battlefield.Players.GetOtherPlayer(this); } }
 
+
+
     public delegate void CardPlayedHandler(Player source, IPlayable carte);
 
     public event CardPlayedHandler CardPlayed;
@@ -89,17 +100,4 @@ public class Player : MonoBehaviour {
         }
     }
 
-    public void Play(IPlayable card)
-    {
-        card.Play();
-        if (CardPlayed != null)
-        {
-            CardPlayed(this, card);
-        }
-    }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }

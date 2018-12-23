@@ -37,6 +37,7 @@ public class CardPower : MonoBehaviour {
         }
 
         //La puissance des habiletés dépend de celle de l'avatar, alors il faut discriminer.
+        //(La discrimination n'est pas encore implémentée)
         if (type is Skill)
         {
             initialPower = cardManager.Power;

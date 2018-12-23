@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 using Cards;
@@ -9,6 +10,9 @@ namespace Cards
     {
         internal static Duel Players;
 
+        /// <summary>
+        /// Retourne une liste de toutes les cartes en jeu.
+        /// </summary>
         internal static List<CardManager> lstPermanents
         {
             get
@@ -25,6 +29,11 @@ namespace Cards
             }
         }
 
+        /// <summary>
+        /// Retourne une liste de toutes les cartes d'un type demandé.
+        /// </summary>
+        /// <typeparam name="T">Type dérivé de carte ou interface implémentée</typeparam>
+        /// <returns></returns>
         internal static List<CardManager> GetPermanentsOfType<T>()
         {
             List<CardManager> result = new List<CardManager>();
@@ -39,6 +48,11 @@ namespace Cards
             return result;
         }
 
+        /// <summary>
+        /// Retourne une liste de toutes les cartes en jeu répondant à un prédicat.
+        /// </summary>
+        /// <param name="predicate">Méthode qui prend une carte comme paramètre et retourne une bool</param>
+        /// <returns></returns>
         internal static List<CardManager> GetPermanentsWhere(Func<Carte, bool> predicate)
         {
             List<CardManager> result = new List<CardManager>();
@@ -53,10 +67,23 @@ namespace Cards
             return result;
         }
 
-        public static List<CardManager> GetAllPlayableCard()
+        /// <summary>
+        /// Retourne les cartes jouables dans la main du joueur courant.
+        /// </summary>
+        /// <returns></returns>
+        public static List<CardManager> GetPlayableCards()
         {
             List<CardManager> result = new List<CardManager>();
-            //To do mettre toute les CardManager qui appartient au joueur Current
+
+            //Recherche la main et l'énergie du joueur courant
+            HandLayout currentPlayerHand = GameController.instance.CurrentPlayer.GetComponentInChildren<HandLayout>();
+            int currentPlayerMana = GameController.instance.CurrentPlayer.AvailableMana;
+
+            //Crée la liste des cartes dans la main du joueur courant.
+            List<CardManager> cardsInCurrentPlayerHand = new List<CardManager>(currentPlayerHand.GetComponentsInChildren<CardManager>());
+
+            result = cardsInCurrentPlayerHand.Where(c => (c is IPlayable && c.ManaCost <= currentPlayerMana)).ToList();
+
             return result;
         }
 

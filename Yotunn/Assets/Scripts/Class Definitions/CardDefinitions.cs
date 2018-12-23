@@ -55,7 +55,7 @@ namespace Cards
     {
         public virtual void Play(CardManager target = null) { //Implémentation de la fonction Play requise par IPlayable
 
-            cardManager.Discard(); //Appel automatiquement la méthode discard du CardManager après qu'elle soit joué
+            cardManager.Discard();              //Les cartes dérivées appèlleront base.Play() à la fin de leur propre Play() pour se défausser.
         }
     }
 

@@ -28,9 +28,4 @@ public class PlayerArea : MonoBehaviour {
         Owner = GetComponent<Player>();
         handlayout = GetComponentInChildren<HandLayout>();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }

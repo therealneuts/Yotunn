@@ -7,9 +7,9 @@ using TMPro;
 
 public class CardHealth : MonoBehaviour {
 
-    CardManager cardManager = null; //Crée une variable cardmanager null qui sera défini plus dans la fonction Awake
+    CardManager cardManager = null; 
     int health;
-    TextMeshProUGUI healthText = null; //Crée une variable Text null qui sera défini plus dans la fonction Awake
+    TextMeshProUGUI healthText = null; 
 
     // Use this for initialization
     void Awake ()
@@ -40,11 +40,6 @@ public class CardHealth : MonoBehaviour {
             gameObject.SetActive(false); //Rend l'objet inactif
         }
     }
-
-    // Update is called once per frame
-    void Update () {
-		
-	}
 
     //Fonction qui prendra en charge l'événement HealthChanged de la carte en affichant la nouvelle valeur.
     public void OnHealthChanged(CardManager card, int difference)

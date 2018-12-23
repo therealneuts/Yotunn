@@ -27,7 +27,7 @@ public class CardCost : MonoBehaviour {
             return;
         }
 
-        //Initialisation de la vie.
+        //Initialisation
         cost = cardManager.ManaCost;
         initialCost = cost;
         costText.text = cost.ToString();

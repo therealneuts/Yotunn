@@ -8,10 +8,7 @@ using DG.Tweening;
 
 /// <summary>
 /// Le CardManager est un script attaché au sommet de la carte qui prend en charge la logique des actions produites sur la carte et par la carte.
-/// Avant d'être instancié, CardManager est une page vierge -- une carte sans identité. Son identité se trouve dans l'objet CarteRessource qui lui est assigné.
-/// Il représente une instance d'une carte définie par un CarteRessource quelconque. Lorsqu'il est instancié avec une CarteRessource, il récupèrera son identité
-/// de celle-ci, et règlera ses valeurs par défaut. C'est le processus de création d'une nouvelle carte.
-/// 
+/// Il sert aussi d'intermédiaire entre les aspects logique et visuel du jeu.
 /// -Alex C.
 /// </summary>
 public class CardManager : MonoBehaviour {
@@ -243,7 +240,7 @@ public class CardManager : MonoBehaviour {
             gameObject.AddComponent<SkillDraggingBehavior>();
         }
         
-        else if (CardScript is Boost) //Le type Boost n'est pas encore implémenter
+        else if (CardScript is Boost) //Le type Boost n'est pas encore implémenté
         {
             //
         }
@@ -251,7 +248,7 @@ public class CardManager : MonoBehaviour {
         // -Alex C.
     }
 
-    //Take Damage est appelé lorsqu'il se fait attaqué
+    //Take Damage est appelé lorsqu'il se fait attaquer
     public void TakeDamage(int power)
     {
         //Change _Health avec son accesseur

@@ -8,10 +8,6 @@ using UnityEngine.UI;
 using TMPro;
 
 public class GameController : MonoBehaviour {
-    //Variables non utilisés
-    //public Player CadreJoueur1;
-    //public Player CadreJoueur2;
-
     //Instance du GameController afin que nous puissons accéder à ses méthodes et ses champs en utilisant qu'une seul instance. 
     //Nous allons pointé une variable de l'objet GAmeController avec cette variable
     public static GameController instance;
@@ -63,14 +59,6 @@ public class GameController : MonoBehaviour {
 
     public void OnGameStart()
     {
-        //Reset
-        //Choisi un joueur au hasard du Duel Joueurs
-
-
-        //For each Joueurs in Joueurs{
-            //Le joueur choisi son avatar OU chaque joueur est assigné un avatar
-            //Les avatars et les decks sont généré
-    //}
 
     }
 
@@ -108,7 +96,7 @@ public class GameController : MonoBehaviour {
 
     
     /// <summary>
-    /// La méthode est appelé lorsqu'un joueur presse sur le boutton end turn
+    /// La méthode est appelée lorsqu'un joueur presse sur le boutton end turn
     /// </summary>
     public void EndTurn()
     {
