@@ -63,14 +63,6 @@ public class GameController : MonoBehaviour {
 
     public void OnGameStart()
     {
-        //Reset
-        //Choisi un joueur au hasard du Duel Joueurs
-
-
-        //For each Joueurs in Joueurs{
-            //Le joueur choisi son avatar OU chaque joueur est assigné un avatar
-            //Les avatars et les decks sont généré
-    //}
 
     }
 
@@ -116,7 +108,8 @@ public class GameController : MonoBehaviour {
 
         foreach (CardManager card in cards)
         {
-            StartTurn += (card as IHasEndStepAction).OnEndStep;
+            if(card.Owner == CurrentPlayer)
+                StartTurn += (card as IHasEndStepAction).OnEndStep;
         }
 
         //Perdre cartes en mains

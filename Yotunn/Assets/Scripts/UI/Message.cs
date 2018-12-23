@@ -33,10 +33,10 @@ public class Message : MonoBehaviour {
 
     public void ShowGameWinner(Player PlayerWinner)
     {
-        //Demande à l'instance de l'objet Message d'afficher le message du player avec un wait time donné 
+        //Demande à l'instance de l'objet Message d'afficher le message du player avec un wait time donné au Coroutine
         string Message = "the winner IS " + PlayerWinner.m_Name;
 
-        //Commence un commande dans le background
+        //Commence un commande dans le background avec l'aide d'une fonction hérité par MonoBehavior
         StartCoroutine(ShowMessageCoroutine(Message, 9f));
 
     }

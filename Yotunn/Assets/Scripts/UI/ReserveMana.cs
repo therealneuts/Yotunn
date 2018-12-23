@@ -96,11 +96,6 @@ public class ReserveMana : MonoBehaviour {
 
             //Changer le text après avoir fait les correction
             txtReserveShard.text = string.Format("{0}/{1}", _inNombreShardNonUtilise, _inNombrePourTour);
-
-            ////trouve le nombre de ShardImage qui sont invisibles 
-            //int indexDebut = lsImageShards.FindAll(ShardImage => ShardImage.color == Color.clear).Count - 1;
-
-
         }
     }
 
@@ -121,11 +116,6 @@ public class ReserveMana : MonoBehaviour {
         {
             inTestShard = DefaultNombrePourTour;
         }
-    }
-
-    private void FixedUpdate()
-    {
-
     }
 
     //cette méthode sera appellé au début du jeu et à chaque tour 

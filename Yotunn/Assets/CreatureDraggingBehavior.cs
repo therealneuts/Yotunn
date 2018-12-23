@@ -12,7 +12,6 @@ enum CardAreas
 
 public class CreatureDraggingBehavior : DraggingAction {
 
-
     [SerializeField] float duration = 0.2f;
     //Vector3 qui sauvegardera la position initiale du début du dragging
     private Vector3 v3PositionInitiale;
@@ -43,10 +42,7 @@ public class CreatureDraggingBehavior : DraggingAction {
             }
         }
     }
-
-
-
-
+         
     //Override qui sauvegarde la position de départ avant le début du dragging afin de le remettre à ça position initiale
     //Soit dans la main du joueur ou à l'endroit ou la carte était dans le jeu
     public override void OnStartDrag()
@@ -61,7 +57,6 @@ public class CreatureDraggingBehavior : DraggingAction {
     //Lorsque le joueur termine de tirer la carte, on détermine s'il choisi une cible légale.
     public override void OnEndDrag() 
     {
-
         if (DragSuccessful()) 
         {
             //Si la créature est dans la main, on la joue.

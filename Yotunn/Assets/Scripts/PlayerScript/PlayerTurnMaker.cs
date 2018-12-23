@@ -8,6 +8,5 @@ public class PlayerTurnMaker : TurnMaker
 	public override void OnUpkeep()
     {
         base.OnUpkeep();
-        
     }
 }
